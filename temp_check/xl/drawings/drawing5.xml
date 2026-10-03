@@ -1,0 +1,2054 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+<xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>1</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>8</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>6</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>11</xdr:row><xdr:rowOff>750000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="101" name="Node_charcoal"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="750000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="8000" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="92000" y="0"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="16200000" swAng="5400000"/>
+            <a:lnTo><a:pt x="100000" y="92000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="0" swAng="5400000"/>
+            <a:lnTo><a:pt x="8000" y="100000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="5400000" swAng="5400000"/>
+            <a:lnTo><a:pt x="0" y="8000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="10800000" swAng="5400000"/>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="F8FAFC"/></a:solidFill>
+      <a:ln w="22225" cmpd="sng">
+        <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="45720" tIns="45720" rIns="45720" bIns="45720" anchor="ctr"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="950" b="1">
+          <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>Charcoal</a:t>
+      </a:r>
+    </a:p><a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="800">
+          <a:solidFill><a:srgbClr val="4A5568"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>オンプレミス基幹</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>1</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>11</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>9</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>16</xdr:row><xdr:rowOff>650000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="102" name="Box_charcoal"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="650000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="0" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="100000" y="0"/></a:lnTo>
+            <a:lnTo><a:pt x="100000" y="100000"/></a:lnTo>
+            <a:lnTo><a:pt x="0" y="100000"/></a:lnTo>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="F8FAFC"/></a:solidFill>
+      <a:ln w="19050" cmpd="sng">
+        <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="72000" tIns="54000" rIns="72000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="l"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="900" b="1">
+          <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t> 【Charcoal 境界枠】</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>11</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>8</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>16</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>11</xdr:row><xdr:rowOff>750000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="103" name="Node_cloud_blue"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="750000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="8000" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="92000" y="0"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="16200000" swAng="5400000"/>
+            <a:lnTo><a:pt x="100000" y="92000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="0" swAng="5400000"/>
+            <a:lnTo><a:pt x="8000" y="100000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="5400000" swAng="5400000"/>
+            <a:lnTo><a:pt x="0" y="8000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="10800000" swAng="5400000"/>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="EFF6FF"/></a:solidFill>
+      <a:ln w="22225" cmpd="sng">
+        <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="45720" tIns="45720" rIns="45720" bIns="45720" anchor="ctr"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="950" b="1">
+          <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>Cloud</a:t>
+      </a:r>
+    </a:p><a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="800">
+          <a:solidFill><a:srgbClr val="4A5568"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>AWS VPC内部通信</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>11</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>11</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>19</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>16</xdr:row><xdr:rowOff>650000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="104" name="Box_cloud_blue"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="650000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="0" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="100000" y="0"/></a:lnTo>
+            <a:lnTo><a:pt x="100000" y="100000"/></a:lnTo>
+            <a:lnTo><a:pt x="0" y="100000"/></a:lnTo>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="EFF6FF"/></a:solidFill>
+      <a:ln w="19050" cmpd="sng">
+        <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="72000" tIns="54000" rIns="72000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="l"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="900" b="1">
+          <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t> 【Cloud 境界枠】</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>8</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>26</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>11</xdr:row><xdr:rowOff>750000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="105" name="Node_emerald"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="750000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="8000" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="92000" y="0"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="16200000" swAng="5400000"/>
+            <a:lnTo><a:pt x="100000" y="92000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="0" swAng="5400000"/>
+            <a:lnTo><a:pt x="8000" y="100000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="5400000" swAng="5400000"/>
+            <a:lnTo><a:pt x="0" y="8000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="10800000" swAng="5400000"/>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="ECFDF5"/></a:solidFill>
+      <a:ln w="22225" cmpd="sng">
+        <a:solidFill><a:srgbClr val="047857"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="45720" tIns="45720" rIns="45720" bIns="45720" anchor="ctr"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="950" b="1">
+          <a:solidFill><a:srgbClr val="047857"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>Emerald</a:t>
+      </a:r>
+    </a:p><a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="800">
+          <a:solidFill><a:srgbClr val="4A5568"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>スマート工場</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>11</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>29</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>16</xdr:row><xdr:rowOff>650000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="106" name="Box_emerald"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="650000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="0" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="100000" y="0"/></a:lnTo>
+            <a:lnTo><a:pt x="100000" y="100000"/></a:lnTo>
+            <a:lnTo><a:pt x="0" y="100000"/></a:lnTo>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="ECFDF5"/></a:solidFill>
+      <a:ln w="19050" cmpd="sng">
+        <a:solidFill><a:srgbClr val="047857"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="72000" tIns="54000" rIns="72000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="l"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="900" b="1">
+          <a:solidFill><a:srgbClr val="047857"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t> 【Emerald 境界枠】</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>31</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>8</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>36</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>11</xdr:row><xdr:rowOff>750000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="107" name="Node_amber"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="750000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="8000" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="92000" y="0"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="16200000" swAng="5400000"/>
+            <a:lnTo><a:pt x="100000" y="92000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="0" swAng="5400000"/>
+            <a:lnTo><a:pt x="8000" y="100000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="5400000" swAng="5400000"/>
+            <a:lnTo><a:pt x="0" y="8000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="10800000" swAng="5400000"/>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="FFFBEB"/></a:solidFill>
+      <a:ln w="22225" cmpd="sng">
+        <a:solidFill><a:srgbClr val="B45309"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="45720" tIns="45720" rIns="45720" bIns="45720" anchor="ctr"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="950" b="1">
+          <a:solidFill><a:srgbClr val="B45309"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>Amber</a:t>
+      </a:r>
+    </a:p><a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="800">
+          <a:solidFill><a:srgbClr val="4A5568"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>Salesforce連携</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>31</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>11</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>39</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>16</xdr:row><xdr:rowOff>650000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="108" name="Box_amber"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="650000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="0" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="100000" y="0"/></a:lnTo>
+            <a:lnTo><a:pt x="100000" y="100000"/></a:lnTo>
+            <a:lnTo><a:pt x="0" y="100000"/></a:lnTo>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="FFFBEB"/></a:solidFill>
+      <a:ln w="19050" cmpd="sng">
+        <a:solidFill><a:srgbClr val="B45309"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="72000" tIns="54000" rIns="72000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="l"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="900" b="1">
+          <a:solidFill><a:srgbClr val="B45309"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t> 【Amber 境界枠】</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>1</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>16</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>6</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>19</xdr:row><xdr:rowOff>750000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="109" name="Node_purple"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="750000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="8000" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="92000" y="0"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="16200000" swAng="5400000"/>
+            <a:lnTo><a:pt x="100000" y="92000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="0" swAng="5400000"/>
+            <a:lnTo><a:pt x="8000" y="100000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="5400000" swAng="5400000"/>
+            <a:lnTo><a:pt x="0" y="8000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="10800000" swAng="5400000"/>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="F5F3FF"/></a:solidFill>
+      <a:ln w="22225" cmpd="sng">
+        <a:solidFill><a:srgbClr val="6D28D9"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="45720" tIns="45720" rIns="45720" bIns="45720" anchor="ctr"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="950" b="1">
+          <a:solidFill><a:srgbClr val="6D28D9"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>Purple</a:t>
+      </a:r>
+    </a:p><a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="800">
+          <a:solidFill><a:srgbClr val="4A5568"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>本社拠点</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>1</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>19</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>9</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>24</xdr:row><xdr:rowOff>650000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="110" name="Box_purple"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="650000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="0" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="100000" y="0"/></a:lnTo>
+            <a:lnTo><a:pt x="100000" y="100000"/></a:lnTo>
+            <a:lnTo><a:pt x="0" y="100000"/></a:lnTo>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="F5F3FF"/></a:solidFill>
+      <a:ln w="19050" cmpd="sng">
+        <a:solidFill><a:srgbClr val="6D28D9"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="72000" tIns="54000" rIns="72000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="l"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="900" b="1">
+          <a:solidFill><a:srgbClr val="6D28D9"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t> 【Purple 境界枠】</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>11</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>16</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>16</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>19</xdr:row><xdr:rowOff>750000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="111" name="Node_cyan"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="750000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="8000" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="92000" y="0"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="16200000" swAng="5400000"/>
+            <a:lnTo><a:pt x="100000" y="92000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="0" swAng="5400000"/>
+            <a:lnTo><a:pt x="8000" y="100000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="5400000" swAng="5400000"/>
+            <a:lnTo><a:pt x="0" y="8000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="10800000" swAng="5400000"/>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="F0F9FF"/></a:solidFill>
+      <a:ln w="22225" cmpd="sng">
+        <a:solidFill><a:srgbClr val="0369A1"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="45720" tIns="45720" rIns="45720" bIns="45720" anchor="ctr"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="950" b="1">
+          <a:solidFill><a:srgbClr val="0369A1"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>Cyan</a:t>
+      </a:r>
+    </a:p><a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="800">
+          <a:solidFill><a:srgbClr val="4A5568"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>現場防塵タブレット</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>11</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>19</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>19</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>24</xdr:row><xdr:rowOff>650000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="112" name="Box_cyan"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="650000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="0" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="100000" y="0"/></a:lnTo>
+            <a:lnTo><a:pt x="100000" y="100000"/></a:lnTo>
+            <a:lnTo><a:pt x="0" y="100000"/></a:lnTo>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="F0F9FF"/></a:solidFill>
+      <a:ln w="19050" cmpd="sng">
+        <a:solidFill><a:srgbClr val="0369A1"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="72000" tIns="54000" rIns="72000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="l"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="900" b="1">
+          <a:solidFill><a:srgbClr val="0369A1"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t> 【Cyan 境界枠】</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>16</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>26</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>19</xdr:row><xdr:rowOff>750000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="113" name="Node_rose"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="750000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="8000" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="92000" y="0"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="16200000" swAng="5400000"/>
+            <a:lnTo><a:pt x="100000" y="92000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="0" swAng="5400000"/>
+            <a:lnTo><a:pt x="8000" y="100000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="5400000" swAng="5400000"/>
+            <a:lnTo><a:pt x="0" y="8000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="10800000" swAng="5400000"/>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="FFF1F2"/></a:solidFill>
+      <a:ln w="22225" cmpd="sng">
+        <a:solidFill><a:srgbClr val="BE123C"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="45720" tIns="45720" rIns="45720" bIns="45720" anchor="ctr"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="950" b="1">
+          <a:solidFill><a:srgbClr val="BE123C"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>Rose</a:t>
+      </a:r>
+    </a:p><a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="800">
+          <a:solidFill><a:srgbClr val="4A5568"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>DMZ</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>19</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>29</xdr:col><xdr:colOff>1550000</xdr:colOff><xdr:row>24</xdr:row><xdr:rowOff>650000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="114" name="Box_rose"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1550000" cy="650000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="0" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="100000" y="0"/></a:lnTo>
+            <a:lnTo><a:pt x="100000" y="100000"/></a:lnTo>
+            <a:lnTo><a:pt x="0" y="100000"/></a:lnTo>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="FFF1F2"/></a:solidFill>
+      <a:ln w="19050" cmpd="sng">
+        <a:solidFill><a:srgbClr val="BE123C"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="72000" tIns="54000" rIns="72000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="l"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="900" b="1">
+          <a:solidFill><a:srgbClr val="BE123C"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t> 【Rose 境界枠】</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>9</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>28</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>13</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>29</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="115" name="Cxn_Elbow_charcoal"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="bentConnector3"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>28</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>28</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="116" name="Cxn_Straight_charcoal"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>25</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>28</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>29</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>28</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="117" name="Cxn_Bidir_charcoal"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+        
+        <a:headEnd type="triangle" w="med" len="med"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>33</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>28</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>37</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>28</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="118" name="Cxn_Dashed_charcoal"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+        <a:prstDash val="dash"/>
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>9</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>31</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>13</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>32</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="119" name="Cxn_Elbow_cloud_blue"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="bentConnector3"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>31</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>31</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="120" name="Cxn_Straight_cloud_blue"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>25</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>31</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>29</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>31</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="121" name="Cxn_Bidir_cloud_blue"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+        
+        <a:headEnd type="triangle" w="med" len="med"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>33</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>31</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>37</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>31</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="122" name="Cxn_Dashed_cloud_blue"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+        <a:prstDash val="dash"/>
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>9</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>34</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>13</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>35</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="123" name="Cxn_Elbow_emerald"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="bentConnector3"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="047857"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>34</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>34</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="124" name="Cxn_Straight_emerald"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="047857"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>25</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>34</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>29</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>34</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="125" name="Cxn_Bidir_emerald"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="047857"/></a:solidFill>
+        
+        <a:headEnd type="triangle" w="med" len="med"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>33</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>34</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>37</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>34</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="126" name="Cxn_Dashed_emerald"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="047857"/></a:solidFill>
+        <a:prstDash val="dash"/>
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>9</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>37</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>13</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>38</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="127" name="Cxn_Elbow_amber"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="bentConnector3"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="B45309"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>37</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>37</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="128" name="Cxn_Straight_amber"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="B45309"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>25</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>37</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>29</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>37</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="129" name="Cxn_Bidir_amber"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="B45309"/></a:solidFill>
+        
+        <a:headEnd type="triangle" w="med" len="med"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>33</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>37</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>37</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>37</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="130" name="Cxn_Dashed_amber"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="B45309"/></a:solidFill>
+        <a:prstDash val="dash"/>
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>9</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>40</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>13</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>41</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="131" name="Cxn_Elbow_purple"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="bentConnector3"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="6D28D9"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>40</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>40</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="132" name="Cxn_Straight_purple"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="6D28D9"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>25</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>40</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>29</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>40</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="133" name="Cxn_Bidir_purple"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="6D28D9"/></a:solidFill>
+        
+        <a:headEnd type="triangle" w="med" len="med"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>33</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>40</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>37</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>40</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="134" name="Cxn_Dashed_purple"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="6D28D9"/></a:solidFill>
+        <a:prstDash val="dash"/>
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>9</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>43</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>13</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>44</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="135" name="Cxn_Elbow_cyan"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="bentConnector3"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="0369A1"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>43</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>43</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="136" name="Cxn_Straight_cyan"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="0369A1"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>25</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>43</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>29</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>43</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="137" name="Cxn_Bidir_cyan"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="0369A1"/></a:solidFill>
+        
+        <a:headEnd type="triangle" w="med" len="med"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>33</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>43</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>37</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>43</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="138" name="Cxn_Dashed_cyan"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="0369A1"/></a:solidFill>
+        <a:prstDash val="dash"/>
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>9</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>46</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>13</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>47</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="139" name="Cxn_Elbow_rose"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="bentConnector3"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="BE123C"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>46</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>46</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="140" name="Cxn_Straight_rose"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="BE123C"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>25</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>46</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>29</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>46</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="141" name="Cxn_Bidir_rose"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="BE123C"/></a:solidFill>
+        
+        <a:headEnd type="triangle" w="med" len="med"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>33</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>46</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>37</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>46</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="142" name="Cxn_Dashed_rose"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="BE123C"/></a:solidFill>
+        <a:prstDash val="dash"/>
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>1</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>52</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>7</xdr:col><xdr:colOff>1800000</xdr:colOff><xdr:row>56</xdr:row><xdr:rowOff>850000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="143" name="Callout_Info"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1800000" cy="850000"/></a:xfrm>
+      <a:prstGeom prst="wedgeRoundRectCallout"><a:avLst/></a:prstGeom>
+      <a:solidFill><a:srgbClr val="EFF6FF"/></a:solidFill>
+      <a:ln w="19050">
+        <a:solidFill><a:srgbClr val="2563EB"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="54000" tIns="54000" rIns="54000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="900" b="1">
+            <a:solidFill><a:srgbClr val="2563EB"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>ℹ️ 通信仕様・ポート定義</a:t>
+        </a:r>
+      </a:p>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・プロトコル: HTTPS / 443
+・通信方式: TLS 1.3 暗号化
+・認証: IAMロール / mTLS</a:t>
+        </a:r>
+      </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>1</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>56</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>7</xdr:col><xdr:colOff>1800000</xdr:colOff><xdr:row>60</xdr:row><xdr:rowOff>850000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="144" name="Memo_Info"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1800000" cy="850000"/></a:xfrm>
+      <a:prstGeom prst="roundRect"><a:avLst><a:gd name="adj" fmla="val 8000"/></a:avLst></a:prstGeom>
+      <a:solidFill><a:srgbClr val="EFF6FF"/></a:solidFill>
+      <a:ln w="19050">
+        <a:solidFill><a:srgbClr val="2563EB"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="54000" tIns="45720" rIns="54000" bIns="45720" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="900" b="1">
+            <a:solidFill><a:srgbClr val="2563EB"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>【設計ポイント】仕様詳細</a:t>
+        </a:r>
+      </a:p>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・Direct Connect 冗長: BGP自動切替</a:t>
+        </a:r>
+      </a:p><a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・VPC内通信: プライベート閉域ルーティング</a:t>
+        </a:r>
+      </a:p><a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・SLA要件: 99.95% Multi-AZ確保</a:t>
+        </a:r>
+      </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>14</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>52</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>20</xdr:col><xdr:colOff>1800000</xdr:colOff><xdr:row>56</xdr:row><xdr:rowOff>850000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="145" name="Callout_Warn"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1800000" cy="850000"/></a:xfrm>
+      <a:prstGeom prst="wedgeRoundRectCallout"><a:avLst/></a:prstGeom>
+      <a:solidFill><a:srgbClr val="FFFBEB"/></a:solidFill>
+      <a:ln w="19050">
+        <a:solidFill><a:srgbClr val="D97706"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="54000" tIns="54000" rIns="54000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="900" b="1">
+            <a:solidFill><a:srgbClr val="D97706"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>⚠️ 設計上の注意点・制約事項</a:t>
+        </a:r>
+      </a:p>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・通信断発生時は現場SSDに72h退避
+・VPN副系切替時の帯域制限に留意
+・Salesforce API日次上限クォータ</a:t>
+        </a:r>
+      </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>14</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>56</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>20</xdr:col><xdr:colOff>1800000</xdr:colOff><xdr:row>60</xdr:row><xdr:rowOff>850000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="146" name="Memo_Warn"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1800000" cy="850000"/></a:xfrm>
+      <a:prstGeom prst="roundRect"><a:avLst><a:gd name="adj" fmla="val 8000"/></a:avLst></a:prstGeom>
+      <a:solidFill><a:srgbClr val="FFFBEB"/></a:solidFill>
+      <a:ln w="19050">
+        <a:solidFill><a:srgbClr val="D97706"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="54000" tIns="45720" rIns="54000" bIns="45720" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="900" b="1">
+            <a:solidFill><a:srgbClr val="D97706"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>【重要考慮】障害・帯域制約</a:t>
+        </a:r>
+      </a:p>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・専用線障害時のBGPキープアライブ監視</a:t>
+        </a:r>
+      </a:p><a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・NAT GW AZ別配置によるSPOF排除</a:t>
+        </a:r>
+      </a:p><a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・ピーク時トラフィックのバッファリング</a:t>
+        </a:r>
+      </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>27</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>52</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>33</xdr:col><xdr:colOff>1800000</xdr:colOff><xdr:row>56</xdr:row><xdr:rowOff>850000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="147" name="Callout_Sec"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1800000" cy="850000"/></a:xfrm>
+      <a:prstGeom prst="wedgeRoundRectCallout"><a:avLst/></a:prstGeom>
+      <a:solidFill><a:srgbClr val="ECFDF5"/></a:solidFill>
+      <a:ln w="19050">
+        <a:solidFill><a:srgbClr val="059669"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="54000" tIns="54000" rIns="54000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="900" b="1">
+            <a:solidFill><a:srgbClr val="059669"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>🛡️ セキュリティ・統制基準</a:t>
+        </a:r>
+      </a:p>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・保存時データ: AWS KMS暗号化
+・転送時データ: TLS 1.3 完全適用
+・監査ログ: CloudTrail 3年保管</a:t>
+        </a:r>
+      </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>27</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>56</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>33</xdr:col><xdr:colOff>1800000</xdr:colOff><xdr:row>60</xdr:row><xdr:rowOff>850000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="148" name="Memo_Sec"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1800000" cy="850000"/></a:xfrm>
+      <a:prstGeom prst="roundRect"><a:avLst><a:gd name="adj" fmla="val 8000"/></a:avLst></a:prstGeom>
+      <a:solidFill><a:srgbClr val="ECFDF5"/></a:solidFill>
+      <a:ln w="19050">
+        <a:solidFill><a:srgbClr val="059669"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="54000" tIns="45720" rIns="54000" bIns="45720" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="900" b="1">
+            <a:solidFill><a:srgbClr val="059669"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>【統制要件】コンプライアンス</a:t>
+        </a:r>
+      </a:p>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・最小権限原則 (PoLP) に基づくIAM設計</a:t>
+        </a:r>
+      </a:p><a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・WAFによる外部インジェクション防御</a:t>
+        </a:r>
+      </a:p><a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>・定期セキュリティ自動スキャン(GuardDuty)</a:t>
+        </a:r>
+      </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>68</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>22</xdr:col><xdr:colOff>1800000</xdr:colOff><xdr:row>71</xdr:row><xdr:rowOff>950000</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="149" name="Hub_16pt_Demo"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1800000" cy="950000"/></a:xfrm>
+      <a:custGeom>
+        <a:avLst/>
+        <a:gdLst/>
+        <a:ahLst/>
+        <a:cxnLst><a:cxn ang="16200000"><a:pos x="20000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="40000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="60000" y="0"/></a:cxn><a:cxn ang="16200000"><a:pos x="80000" y="0"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="20000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="40000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="60000"/></a:cxn><a:cxn ang="0"><a:pos x="100000" y="80000"/></a:cxn><a:cxn ang="5400000"><a:pos x="80000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="60000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="40000" y="100000"/></a:cxn><a:cxn ang="5400000"><a:pos x="20000" y="100000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="80000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="60000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="40000"/></a:cxn><a:cxn ang="10800000"><a:pos x="0" y="20000"/></a:cxn></a:cxnLst>
+        <a:rect l="0" t="0" r="100000" b="100000"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="8000" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="92000" y="0"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="16200000" swAng="5400000"/>
+            <a:lnTo><a:pt x="100000" y="92000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="0" swAng="5400000"/>
+            <a:lnTo><a:pt x="8000" y="100000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="5400000" swAng="5400000"/>
+            <a:lnTo><a:pt x="0" y="8000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="10800000" swAng="5400000"/>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>
+      <a:solidFill><a:srgbClr val="F8FAFC"/></a:solidFill>
+      <a:ln w="22225" cmpd="sng">
+        <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="45720" tIns="45720" rIns="45720" bIns="45720" anchor="ctr"/>
+      <a:lstStyle/>
+      <a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="950" b="1">
+          <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>16接続点 Hubノード</a:t>
+      </a:r>
+    </a:p><a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="800">
+          <a:solidFill><a:srgbClr val="4A5568"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>等間隔接続完全サンプル</a:t>
+      </a:r>
+    </a:p>
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>15</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>64</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>68</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="150" name="Demo_Top_1"/>
+      <xdr:cNvCxnSpPr><a:endCxn id="149" idx="0"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>64</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>18</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>68</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="151" name="Demo_Top_2"/>
+      <xdr:cNvCxnSpPr><a:endCxn id="149" idx="1"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="047857"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>19</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>64</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>19</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>68</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="152" name="Demo_Top_3"/>
+      <xdr:cNvCxnSpPr><a:endCxn id="149" idx="2"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="B45309"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>64</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>20</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>68</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="153" name="Demo_Top_4"/>
+      <xdr:cNvCxnSpPr><a:endCxn id="149" idx="3"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="6D28D9"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>23</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>68</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>28</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>68</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="154" name="Demo_Right_1"/>
+      <xdr:cNvCxnSpPr><a:stCxn id="149" idx="4"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="BE123C"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>23</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>69</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>28</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>69</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="155" name="Demo_Right_2"/>
+      <xdr:cNvCxnSpPr><a:stCxn id="149" idx="5"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>23</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>70</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>28</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>70</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="156" name="Demo_Right_3"/>
+      <xdr:cNvCxnSpPr><a:stCxn id="149" idx="6"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>23</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>71</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>28</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>71</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="157" name="Demo_Right_4"/>
+      <xdr:cNvCxnSpPr><a:stCxn id="149" idx="7"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="047857"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>73</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>21</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>77</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="158" name="Demo_Bottom_1"/>
+      <xdr:cNvCxnSpPr><a:stCxn id="149" idx="8"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="B45309"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>19</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>73</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>19</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>77</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="159" name="Demo_Bottom_2"/>
+      <xdr:cNvCxnSpPr><a:stCxn id="149" idx="9"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="6D28D9"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>73</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>77</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="160" name="Demo_Bottom_3"/>
+      <xdr:cNvCxnSpPr><a:stCxn id="149" idx="10"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="0369A1"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>15</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>73</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>15</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>77</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="161" name="Demo_Bottom_4"/>
+      <xdr:cNvCxnSpPr><a:stCxn id="149" idx="11"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="BE123C"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>11</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>71</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>71</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="162" name="Demo_Left_1"/>
+      <xdr:cNvCxnSpPr><a:endCxn id="149" idx="12"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1A202C"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>11</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>70</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>70</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="163" name="Demo_Left_2"/>
+      <xdr:cNvCxnSpPr><a:endCxn id="149" idx="13"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>11</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>69</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>69</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="164" name="Demo_Left_3"/>
+      <xdr:cNvCxnSpPr><a:endCxn id="149" idx="14"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="047857"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor><xdr:twoCellAnchor>
+  <xdr:from><xdr:col>11</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>68</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>17</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>68</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="165" name="Demo_Left_4"/>
+      <xdr:cNvCxnSpPr><a:endCxn id="149" idx="15"/></xdr:cNvCxnSpPr>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="line"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="B45309"/></a:solidFill>
+        
+        <a:headEnd type="none"/>
+        <a:tailEnd type="triangle" w="med" len="med"/>
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor>
+</xdr:wsDr>

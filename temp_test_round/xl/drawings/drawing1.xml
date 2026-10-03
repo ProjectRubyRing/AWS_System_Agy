@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+  <xdr:twoCellAnchor editAs="oneCell">
+    <xdr:from><xdr:col>2</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>2</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+    <xdr:to><xdr:col>8</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>7</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+    <xdr:sp macro="" textlink="">
+      <xdr:nvSpPr>
+        <xdr:cNvPr id="101" name="RoundNode"/>
+        <xdr:cNvSpPr/>
+      </xdr:nvSpPr>
+      <xdr:spPr>
+        <a:xfrm><a:off x="0" y="0"/><a:ext cx="2000000" cy="1000000"/></a:xfrm>
+        <a:custGeom>
+          <a:avLst/>
+          <a:gdLst>
+            <a:gd name="rad" fmla="*/ 8000 w 100000"/>
+            <a:gd name="x1" fmla="*/ w 1 5"/>
+            <a:gd name="x2" fmla="*/ w 2 5"/>
+            <a:gd name="x3" fmla="*/ w 3 5"/>
+            <a:gd name="x4" fmla="*/ w 4 5"/>
+            <a:gd name="y1" fmla="*/ h 1 5"/>
+            <a:gd name="y2" fmla="*/ h 2 5"/>
+            <a:gd name="y3" fmla="*/ h 3 5"/>
+            <a:gd name="y4" fmla="*/ h 4 5"/>
+          </a:gdLst>
+          <a:ahLst/>
+          <a:cxnLst>
+            <a:cxn ang="16200000"><a:pos x="x1" y="t"/></a:cxn>
+            <a:cxn ang="16200000"><a:pos x="x2" y="t"/></a:cxn>
+            <a:cxn ang="16200000"><a:pos x="x3" y="t"/></a:cxn>
+            <a:cxn ang="16200000"><a:pos x="x4" y="t"/></a:cxn>
+            <a:cxn ang="0"><a:pos x="r" y="y1"/></a:cxn>
+            <a:cxn ang="0"><a:pos x="r" y="y2"/></a:cxn>
+            <a:cxn ang="0"><a:pos x="r" y="y3"/></a:cxn>
+            <a:cxn ang="0"><a:pos x="r" y="y4"/></a:cxn>
+            <a:cxn ang="5400000"><a:pos x="x4" y="b"/></a:cxn>
+            <a:cxn ang="5400000"><a:pos x="x3" y="b"/></a:cxn>
+            <a:cxn ang="5400000"><a:pos x="x2" y="b"/></a:cxn>
+            <a:cxn ang="5400000"><a:pos x="x1" y="b"/></a:cxn>
+            <a:cxn ang="10800000"><a:pos x="l" y="y4"/></a:cxn>
+            <a:cxn ang="10800000"><a:pos x="l" y="y3"/></a:cxn>
+            <a:cxn ang="10800000"><a:pos x="l" y="y2"/></a:cxn>
+            <a:cxn ang="10800000"><a:pos x="l" y="y1"/></a:cxn>
+          </a:cxnLst>
+          <a:rect l="l" t="t" r="r" b="b"/>
+          <a:pathLst>
+            <a:path w="100000" h="100000">
+              <a:moveTo><a:pt x="8000" y="0"/></a:moveTo>
+              <a:lnTo><a:pt x="92000" y="0"/></a:lnTo>
+              <a:arcTo wR="8000" hR="8000" stAng="16200000" swAng="5400000"/>
+              <a:lnTo><a:pt x="100000" y="92000"/></a:lnTo>
+              <a:arcTo wR="8000" hR="8000" stAng="0" swAng="5400000"/>
+              <a:lnTo><a:pt x="8000" y="100000"/></a:lnTo>
+              <a:arcTo wR="8000" hR="8000" stAng="5400000" swAng="5400000"/>
+              <a:lnTo><a:pt x="0" y="8000"/></a:lnTo>
+              <a:arcTo wR="8000" hR="8000" stAng="10800000" swAng="5400000"/>
+              <a:close/>
+            </a:path>
+          </a:pathLst>
+        </a:custGeom>
+        <a:solidFill><a:srgbClr val="EFF6FF"/></a:solidFill>
+        <a:ln w="22225"><a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill></a:ln>
+      </xdr:spPr>
+      <xdr:txBody>
+        <a:bodyPr vert="horz" lIns="45720" tIns="45720" rIns="45720" bIns="45720" anchor="ctr"/>
+        <a:lstStyle/>
+        <a:p>
+          <a:pPr algn="ctr"/>
+          <a:r>
+            <a:rPr lang="ja-JP" sz="1000" b="1">
+              <a:solidFill><a:srgbClr val="1E40AF"/></a:solidFill>
+              <a:latin typeface="Meiryo UI"/>
+              <a:ea typeface="Meiryo UI"/>
+            </a:rPr>
+            <a:t>Cloud Blue ノード</a:t>
+          </a:r>
+        </a:p>
+      </xdr:txBody>
+    </xdr:sp>
+    <xdr:clientData/>
+  </xdr:twoCellAnchor>
+</xdr:wsDr>

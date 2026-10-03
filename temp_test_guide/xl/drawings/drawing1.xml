@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+  <xdr:twoCellAnchor editAs="oneCell">
+    <xdr:from><xdr:col>2</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>2</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+    <xdr:to><xdr:col>8</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>8</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+    <xdr:sp macro="" textlink="">
+      <xdr:nvSpPr>
+        <xdr:cNvPr id="101" name="TestShape"/>
+        <xdr:cNvSpPr/>
+      </xdr:nvSpPr>
+      <xdr:spPr>
+        <a:xfrm><a:off x="0" y="0"/><a:ext cx="2000000" cy="1000000"/></a:xfrm>
+        <a:custGeom>
+          <a:avLst/>
+          <a:gdLst>
+            <a:gd name="x1" fmla="*/ w 1 5"/>
+            <a:gd name="x2" fmla="*/ w 2 5"/>
+            <a:gd name="x3" fmla="*/ w 3 5"/>
+            <a:gd name="x4" fmla="*/ w 4 5"/>
+            <a:gd name="y1" fmla="*/ h 1 5"/>
+            <a:gd name="y2" fmla="*/ h 2 5"/>
+            <a:gd name="y3" fmla="*/ h 3 5"/>
+            <a:gd name="y4" fmla="*/ h 4 5"/>
+          </a:gdLst>
+          <a:ahLst/>
+          <a:cxnLst>
+            <!-- Top side: 4 sites -->
+            <a:cxn ang="16200000"><a:pos x="x1" y="t"/></a:cxn>
+            <a:cxn ang="16200000"><a:pos x="x2" y="t"/></a:cxn>
+            <a:cxn ang="16200000"><a:pos x="x3" y="t"/></a:cxn>
+            <a:cxn ang="16200000"><a:pos x="x4" y="t"/></a:cxn>
+            <!-- Right side: 4 sites -->
+            <a:cxn ang="0"><a:pos x="r" y="y1"/></a:cxn>
+            <a:cxn ang="0"><a:pos x="r" y="y2"/></a:cxn>
+            <a:cxn ang="0"><a:pos x="r" y="y3"/></a:cxn>
+            <a:cxn ang="0"><a:pos x="r" y="y4"/></a:cxn>
+            <!-- Bottom side: 4 sites -->
+            <a:cxn ang="5400000"><a:pos x="x4" y="b"/></a:cxn>
+            <a:cxn ang="5400000"><a:pos x="x3" y="b"/></a:cxn>
+            <a:cxn ang="5400000"><a:pos x="x2" y="b"/></a:cxn>
+            <a:cxn ang="5400000"><a:pos x="x1" y="b"/></a:cxn>
+            <!-- Left side: 4 sites -->
+            <a:cxn ang="10800000"><a:pos x="l" y="y4"/></a:cxn>
+            <a:cxn ang="10800000"><a:pos x="l" y="y3"/></a:cxn>
+            <a:cxn ang="10800000"><a:pos x="l" y="y2"/></a:cxn>
+            <a:cxn ang="10800000"><a:pos x="l" y="y1"/></a:cxn>
+          </a:cxnLst>
+          <a:rect l="l" t="t" r="r" b="b"/>
+          <a:pathLst>
+            <a:path w="2000000" h="1000000">
+              <a:moveTo><a:pt x="0" y="0"/></a:moveTo>
+              <a:lnTo><a:pt x="2000000" y="0"/></a:lnTo>
+              <a:lnTo><a:pt x="2000000" y="1000000"/></a:lnTo>
+              <a:lnTo><a:pt x="0" y="1000000"/></a:lnTo>
+              <a:close/>
+            </a:path>
+          </a:pathLst>
+        </a:custGeom>
+        <a:solidFill><a:srgbClr val="F8FAFC"/></a:solidFill>
+        <a:ln w="22225"><a:solidFill><a:srgbClr val="1A202C"/></a:solidFill></a:ln>
+      </xdr:spPr>
+    </xdr:sp>
+    <xdr:clientData/>
+  </xdr:twoCellAnchor>
+</xdr:wsDr>

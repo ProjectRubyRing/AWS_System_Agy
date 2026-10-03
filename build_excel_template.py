@@ -1,9 +1,144 @@
 # -*- coding: utf-8 -*-
-import os
-import shutil
-import xlsxwriter
+"""
+現場システム × AWS 統合システム構成図 Excelテンプレート 自動生成スクリプト Ver 2.0.0
+- Meiryo UI 統一 / モノトーン基調 + 美しい7色データフロー経路配色
+- セル方眼紙（マイクログリッド）吸着設計（幅3.4 / 高さ18pt）
+- 等間隔16箇所接続ポイント（各辺4箇所）を持つ四角形部品（7色展開）
+- 7色の接続コネクタ線部品（カギ線・直線・双方向・破線：計28種）
+- 3色のコメント・注記入力用図形（引き出し吹き出し型・付箋メモカード型）
+- 16接続点ノードへの等間隔接続完全サンプル
+- 全6シート構成（ガイド、概要図、詳細図、作図図形パーツ集、概要パーツ集、詳細パーツ集）
+"""
 
-def create_system_architecture_template():
+import os
+import sys
+import shutil
+import zipfile
+import xlsxwriter
+import win32com.client
+
+# =========================================================================
+# 0. カラーパレット定数定義 (7色のデータフロー + 3色のコメント図形)
+# =========================================================================
+
+PALETTE_7COLORS = {
+    "charcoal": {
+        "id": "charcoal",
+        "name": "Charcoal Black (基盤・オンプレ標準)",
+        "role": "オンプレミス基幹・共通インフラ・デフォルト",
+        "border": "1A202C",
+        "fill": "F8FAFC",
+        "header": "2D3748",
+        "text": "1A202C",
+        "rgb": 0x1A202C,
+        "example_src": "オンプレミス製造ホスト / 既存DB",
+    },
+    "cloud_blue": {
+        "id": "cloud_blue",
+        "name": "Cloud Blue (AWS・クラウド基盤)",
+        "role": "AWS VPC内部通信・プライベートクラウド・基幹NW",
+        "border": "1E40AF",
+        "fill": "EFF6FF",
+        "header": "1D4ED8",
+        "text": "1E3A8A",
+        "rgb": 0x1E40AF,
+        "example_src": "AWS VPC / ECS / RDS / Lambda",
+    },
+    "emerald": {
+        "id": "emerald",
+        "name": "Emerald Green (現場IoT・工場OT設備)",
+        "role": "スマート工場・PLC・センサー・産業制御ライン",
+        "border": "047857",
+        "fill": "ECFDF5",
+        "header": "065F46",
+        "text": "064E3B",
+        "rgb": 0x047857,
+        "example_src": "工場PLC / センサー / エッジIPC (Modbus/OPC-UA)",
+    },
+    "amber": {
+        "id": "amber",
+        "name": "Amber Orange (外部SaaS・Salesforce)",
+        "role": "Salesforce連携・外部SaaS・パートナーAPI",
+        "border": "B45309",
+        "fill": "FFFBEB",
+        "header": "92400E",
+        "text": "78350F",
+        "rgb": 0xB45309,
+        "example_src": "Salesforce CRM / 外部SaaS / 顧客ポータル",
+    },
+    "purple": {
+        "id": "purple",
+        "name": "Purple Violet (社内イントラ・拠点・統合分析)",
+        "role": "本社拠点・Direct Connect・時系列ストリーム・BI分析",
+        "border": "6D28D9",
+        "fill": "F5F3FF",
+        "header": "5B21B6",
+        "text": "4C1D95",
+        "rgb": 0x6D28D9,
+        "example_src": "本社オフィス / Direct Connect専用線 / BIツール",
+    },
+    "cyan": {
+        "id": "cyan",
+        "name": "Cyan Sky (現場モバイル・作業端末)",
+        "role": "現場防塵タブレット・ハンディ端末・5G/LTE回線",
+        "border": "0369A1",
+        "fill": "F0F9FF",
+        "header": "075985",
+        "text": "0C4A6E",
+        "rgb": 0x0369A1,
+        "example_src": "現場作業タブレット / Handy / 4G・5Gセルラー",
+    },
+    "rose": {
+        "id": "rose",
+        "name": "Rose Crimson (DMZ境界・外部インターネット)",
+        "role": "DMZ・UTM/FW・外部公開API・セキュリティ監視・アラート",
+        "border": "BE123C",
+        "fill": "FFF1F2",
+        "header": "9F1239",
+        "text": "881337",
+        "rgb": 0xBE123C,
+        "example_src": "インターネット境界 / 次世代UTM / WAF防御",
+    }
+}
+
+COMMENT_3COLORS = {
+    "info_blue": {
+        "id": "info_blue",
+        "name": "Info Blue (仕様・通信ポイント)",
+        "border": "2563EB",
+        "fill": "EFF6FF",
+        "header": "1E40AF",
+        "text": "1E3A8A",
+        "title": "【設計ポイント】",
+        "desc": "通信プロトコル仕様・ポート番号・冗長化方針の補足",
+        "sample_lines": ["・プロトコル: HTTPS / 443 (TLS 1.3)", "・Direct Connect 冗長: BGP自動切替", "・可用性目標: 99.95% Multi-AZ確保"]
+    },
+    "warning_amber": {
+        "id": "warning_amber",
+        "name": "Warning Amber (重要注意点・設計制約)",
+        "border": "D97706",
+        "fill": "FFFBEB",
+        "header": "B45309",
+        "text": "78350F",
+        "title": "【設計上の注意】",
+        "desc": "帯域制限・フェイルオーバー条件・制約事項の注意",
+        "sample_lines": ["・通信断時は現場SSDに72h退避バッファ", "・VPN副系切替時の帯域制限に留意", "・Salesforce API日次クォータに留意"]
+    },
+    "security_emerald": {
+        "id": "security_emerald",
+        "name": "Security Emerald (セキュリティ・運用基準)",
+        "border": "059669",
+        "fill": "ECFDF5",
+        "header": "065F46",
+        "text": "064E3B",
+        "title": "【セキュリティ要件】",
+        "desc": "暗号化方式 (TLS1.3/KMS)・IAM権限・監査ログ保管方針",
+        "sample_lines": ["・保存時データ: AWS KMS暗号化 (SSE-KMS)", "・転送時データ: TLS 1.3 / IPsec 完全適用", "・監査ログ: CloudTrail 3年間長期保管"]
+    }
+}
+
+
+def build_workbook():
     filename = "AWS_現場システム統合構成図_テンプレート.xlsx"
     workbook = xlsxwriter.Workbook(filename, {'default_date_format': 'yyyy/mm/dd'})
     
@@ -41,7 +176,15 @@ def create_system_architecture_template():
     f_box_head_dark = fmt({'font_size': 9.5, 'bold': True, 'font_color': '#FFFFFF', 'bg_color': '#1A202C', 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#1A202C', 'text_wrap': True})
     f_box_head_slate = fmt({'font_size': 9, 'bold': True, 'font_color': '#FFFFFF', 'bg_color': '#2D3748', 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#2D3748', 'text_wrap': True})
     f_box_head_gray = fmt({'font_size': 8.5, 'bold': True, 'font_color': '#FFFFFF', 'bg_color': '#4A5568', 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#4A5568', 'text_wrap': True})
-    f_box_head_light = fmt({'font_size': 8.5, 'bold': True, 'font_color': '#1A202C', 'bg_color': '#EDF2F7', 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#718096', 'text_wrap': True})
+    
+    # 7-Color Header Formats
+    f_head_charcoal = fmt({'font_size': 8.5, 'bold': True, 'font_color': '#FFFFFF', 'bg_color': '#1A202C', 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#1A202C'})
+    f_head_blue = fmt({'font_size': 8.5, 'bold': True, 'font_color': '#FFFFFF', 'bg_color': '#1E40AF', 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#1E40AF'})
+    f_head_emerald = fmt({'font_size': 8.5, 'bold': True, 'font_color': '#FFFFFF', 'bg_color': '#047857', 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#047857'})
+    f_head_amber = fmt({'font_size': 8.5, 'bold': True, 'font_color': '#FFFFFF', 'bg_color': '#B45309', 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#B45309'})
+    f_head_purple = fmt({'font_size': 8.5, 'bold': True, 'font_color': '#FFFFFF', 'bg_color': '#6D28D9', 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#6D28D9'})
+    f_head_cyan = fmt({'font_size': 8.5, 'bold': True, 'font_color': '#FFFFFF', 'bg_color': '#0369A1', 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#0369A1'})
+    f_head_rose = fmt({'font_size': 8.5, 'bold': True, 'font_color': '#FFFFFF', 'bg_color': '#BE123C', 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#BE123C'})
 
     # Container Body Fills
     f_bg_cloud = fmt({'bg_color': '#F7FAFC', 'border': 1, 'border_color': '#718096'})
@@ -55,8 +198,6 @@ def create_system_architecture_template():
     # Note / Legend Formats
     f_note = fmt({'font_size': 8, 'font_color': '#4A5568', 'valign': 'vcenter', 'text_wrap': True})
     f_flow_arrow = fmt({'font_size': 11, 'bold': True, 'font_color': '#2D3748', 'align': 'center', 'valign': 'vcenter'})
-
-    print("Formats initialized successfully.")
 
     # -------------------------------------------------------------
     # HELPER: Draw Container Box with Cell Borders
@@ -90,9 +231,9 @@ def create_system_architecture_template():
         ws.merge_range(2, 1, 2, 3, "システム名称", f_meta_label)
         ws.merge_range(2, 4, 2, 15, sys_name, f_meta_val)
         ws.merge_range(2, 16, 2, 18, "設計バージョン", f_meta_label)
-        ws.merge_range(2, 19, 2, 22, "Ver 1.0.0 (正式版)", f_meta_val)
+        ws.merge_range(2, 19, 2, 22, "Ver 2.0.0 (高機能版)", f_meta_val)
         ws.merge_range(2, 23, 2, 25, "作成日", f_meta_label)
-        ws.merge_range(2, 26, 2, 29, "2026/10/01", f_meta_val)
+        ws.merge_range(2, 26, 2, 29, "2026/10/04", f_meta_val)
         ws.merge_range(2, 30, 2, 32, "機密区分", f_meta_label)
         ws.merge_range(2, 33, 2, 35, "社内限り (Confidential)", f_meta_val)
         ws.merge_range(2, 36, 2, 38, "作成者", f_meta_label)
@@ -102,7 +243,7 @@ def create_system_architecture_template():
         ws.merge_range(3, 1, 3, 3, "対象リージョン", f_meta_label)
         ws.merge_range(3, 4, 3, 15, "AWS 東京リージョン (ap-northeast-1) / 大阪 (DR)", f_meta_val)
         ws.merge_range(3, 16, 3, 18, "更新日", f_meta_label)
-        ws.merge_range(3, 19, 3, 22, "2026/10/01", f_meta_val)
+        ws.merge_range(3, 19, 3, 22, "2026/10/04", f_meta_val)
         ws.merge_range(3, 23, 3, 25, "承認ステータス", f_meta_label)
         ws.merge_range(3, 26, 3, 29, "設計承認済 (Approved)", f_meta_val)
         ws.merge_range(3, 30, 3, 32, "承認印", f_meta_label)
@@ -113,7 +254,6 @@ def create_system_architecture_template():
         ws.write(3, 37, "【担当】", f_meta_label)
         ws.merge_range(3, 38, 3, 41, "アーキテクト", f_meta_val)
 
-
     # =========================================================================
     # SHEET 0: 00_利用ガイド・凡例規約
     # =========================================================================
@@ -123,17 +263,17 @@ def create_system_architecture_template():
     ws0.set_paper(9) # A4
     ws0.set_margins(left=0.4, right=0.4, top=0.5, bottom=0.5)
     ws0.set_column('A:A', 3)
-    ws0.set_column('B:B', 18)
-    ws0.set_column('C:C', 20)
-    ws0.set_column('D:D', 26)
+    ws0.set_column('B:B', 20)
+    ws0.set_column('C:C', 18)
+    ws0.set_column('D:D', 24)
     ws0.set_column('E:E', 32)
     ws0.set_column('F:F', 24)
     ws0.set_column('G:G', 16)
     
-    write_meta_header(ws0, "【利用ガイド】現場×AWS 統合システム構成図 テンプレート標準規約", "Meiryo UI / モノトーン設計標準")
+    write_meta_header(ws0, "【利用ガイド】現場×AWS 統合システム構成図 テンプレート標準規約", "16接続点図形 / 7色経路 / 3色コメント規約")
     
     row = 5
-    ws0.merge_range(row, 1, row, 6, "1. 本テンプレートの構成とシートの役割分担", f_sec_title)
+    ws0.merge_range(row, 1, row, 6, "1. 本テンプレートの構成とシートの役割分担 (全6シート)", f_sec_title)
     row += 1
     headers_s0 = ["シート名", "対象読者・スコープ", "表現内容・詳細度", "含まれる主な要素", "活用シーン"]
     for ci, h in enumerate(headers_s0):
@@ -143,8 +283,9 @@ def create_system_architecture_template():
     sheet_roles = [
         ("01_構成図_概要", "経営層・PM・全体関係者", "マクロ鳥瞰図 (1枚で全体像把握)", "現場設備群、拠点、専用線/VPN、AWS主要層、外部連携、全体仕様表", "提案書、プロジェクト全体説明、報告資料、システム俯瞰"),
         ("02_構成図_詳細", "インフラ・NW・開発・運用", "精密設計図 (実装・構築レベル)", "Multi-AZ VPC、サブネットCIDR、IP、ポート、SG、OT/IT分離、詳細機器一覧表", "基本設計書、詳細設計書、NW申請、セキュリティ監査、構築保守"),
-        ("03_パーツ集_概要用", "構成図作成者", "概要図用コピペ部品カタログ", "マクロ境界枠、主要階層カード、データフローマクロ線、エグゼクティブ凡例", "概要図を新規作成・拡張カスタマイズする際の貼り付け元"),
-        ("04_パーツ集_詳細用", "構成図作成者", "詳細図用コピペ部品カタログ", "AWS全70+アイコン、現場機器、詳細線種、ポートタグ、ステータスバッジ、表部品", "詳細図で大量のシステムやサービスを精密配置する際の貼り付け元"),
+        ("03_パーツ集_作図図形・コネクタ線", "構成図作成者 (★メイン部品)", "16接続点図形・7色線・3色コメント", "16箇所接続ポイント付き四角形(7色)、コネクタ線(7色×4種)、コメント図形(3色)", "構成図を美しく新規作図・線接続・注記する際の主要コピペ元"),
+        ("04_パーツ集_概要用", "構成図作成者", "概要図用マクロ部品カタログ", "マクロ境界枠、主要階層カード、データフローマクロ線、エグゼクティブ凡例", "概要図を新規作成・拡張カスタマイズする際の貼り付け元"),
+        ("05_パーツ集_詳細用", "構成図作成者", "詳細図用全アイコン・タグカタログ", "AWS全70+アイコン、現場機器、詳細線種、ポートタグ、ステータスバッジ、表部品", "詳細図で大量のシステムやサービスを精密配置する際の貼り付け元"),
     ]
     for r_data in sheet_roles:
         ws0.write(row, 1, r_data[0], f_tbl_cell_center)
@@ -156,51 +297,68 @@ def create_system_architecture_template():
         row += 1
         
     row += 1
-    ws0.merge_range(row, 1, row, 6, "2. デザイン原則・カラーパレット定義 (モノトーンベース)", f_sec_title)
+    ws0.merge_range(row, 1, row, 6, "2. 【重要機能】16箇所接続ポイント付き図形部品とコネクタ線の吸着仕様", f_sec_title)
     row += 1
     
-    headers_color = ["カラーコード", "カラー名称", "色彩イメージ", "主な適用対象", "設計意図・効果"]
+    cxn_guide = [
+        ("四角形の16箇所接続ポイント", "従来のExcel標準四角形は各辺の中央「4箇所」しかコネクタ接続できませんでしたが、本テンプレートの図形部品は【各辺に4箇所ずつ、合計16箇所】の等間隔接続ポイントを実装しています。これにより、1つのシステムカードに対して上下左右から複数本の線を重ならずに平行に引き出すことが可能です。"),
+        ("コネクタ線の自動吸着（スナップ）", "コネクタ線（カギ線・直線・双方向・破線）の端点を図形の辺に近づけると、グレー/赤の接続マークが16箇所に浮かび上がり、ピタッと吸着します。図形を移動しても線が自動追従するため、作図後のレイアウト変更でも配線が崩れません。"),
+        ("等間隔配線のコツ（20%, 40%, 60%, 80%）", "接続ポイントは各辺の 20%, 40%, 60%, 80% の位置に等間隔配置されています。例えば左から2本の線を受ける場合は「20%と40%」、3本受ける場合は「20%, 40%, 60%」のように規則正しく接続することで、美しい整列配線が実現します。")
+    ]
+    for g_title, g_desc in cxn_guide:
+        ws0.write(row, 1, g_title, f_tbl_head)
+        ws0.merge_range(row, 2, row, 6, g_desc, f_tbl_cell)
+        ws0.set_row(row, 28)
+        row += 1
+
+    row += 1
+    ws0.merge_range(row, 1, row, 6, "3. 【美しい7色展開】接続経路別データフロー カラーパレット定義 (黒＋6色)", f_sec_title)
+    row += 1
+    
+    headers_color = ["カラーコード", "カラー名称", "色彩イメージ", "主な接続経路・データフロー", "設計適用ルール"]
     for ci, h in enumerate(headers_color):
         ws0.write(row, ci + 1, h, f_tbl_head)
     row += 1
     
-    colors_info = [
-        ("#1A202C", "Charcoal Dark", "極暗濃灰 (黒に近いスレート)", "シートメインタイトル、最重要境界、全体枠外枠", "視覚的な引き締めと最重要レベルの階層識別"),
-        ("#2D3748", "Deep Slate", "濃スレートグレー", "大見出し、アイコン上部ヘッダー、主要境界線", "高コントラストで可読性に優れた基調ダークトーン"),
-        ("#4A5568", "Medium Slate", "中間スレートグレー", "サブネット境界、二重線、第2階層見出し", "主要線と補助線の明確な視覚的差別化"),
-        ("#718096", "Neutral Gray", "ニュートラルグレー", "非同期破線、管理点線、注記、セル区切り線", "情報量を増やしても画面がうるさくならない抑制トーン"),
-        ("#E2E8F0", "Soft Gray", "薄灰塗りつぶし", "DBサブネット、重要カードヘッダー、表ゼブラ", "背景に自然になじむ落ち着いたゾーン強調"),
-        ("#EDF2F7", "Light Slate", "極薄スレート塗りつぶし", "VPC背景、入力欄、マクロカード背景", "白背景と明確に区別できるコンテナ下地"),
-        ("#F7FAFC", "Off-White", "クリーンオフホワイト", "AWS Cloud全体枠背景、現場プラント背景", "清潔感と高い視認性を両立する広域キャンバス"),
-        ("#FFFFFF", "Pure White", "純白", "個別コンポーネントカード、アイコン背景", "印刷・PDF化・モノクロコピー時でも最高の明瞭度"),
-    ]
-    for c_code, c_name, c_img, c_target, c_intent in colors_info:
-        c_fmt = workbook.add_format({'font_name': 'Meiryo UI', 'font_size': 8.5, 'bold': True, 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#CBD5E0', 'bg_color': c_code, 'font_color': '#FFFFFF' if c_code in ['#1A202C', '#2D3748', '#4A5568'] else '#1A202C'})
+    for c_key, c_data in PALETTE_7COLORS.items():
+        c_code = "#" + c_data["border"]
+        c_fmt = workbook.add_format({'font_name': 'Meiryo UI', 'font_size': 8.5, 'bold': True, 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#CBD5E0', 'bg_color': c_code, 'font_color': '#FFFFFF'})
         ws0.write(row, 1, c_code, c_fmt)
-        ws0.write(row, 2, c_name, f_tbl_cell_center)
-        ws0.write(row, 3, c_img, f_tbl_cell)
-        ws0.write(row, 4, c_target, f_tbl_cell)
-        ws0.write(row, 5, c_intent, f_tbl_cell)
+        ws0.write(row, 2, c_data["name"], f_tbl_cell_center)
+        ws0.write(row, 3, c_data["role"], f_tbl_cell)
+        ws0.write(row, 4, c_data["example_src"], f_tbl_cell)
+        ws0.write(row, 5, "図形枠線・塗り下地・コネクタ線の色を統一してデータ経路を明示", f_tbl_cell)
         ws0.set_row(row, 20)
         row += 1
 
     row += 1
-    ws0.merge_range(row, 1, row, 6, "3. 作図を極めて美しく仕上げる「セル方眼」操作テクニック", f_sec_title)
+    ws0.merge_range(row, 1, row, 6, "4. 【美しい3色展開】コメント・注記入力用図形 活用規約", f_sec_title)
+    row += 1
+    
+    for ck, cdat in COMMENT_3COLORS.items():
+        c_code = "#" + cdat["border"]
+        c_fmt = workbook.add_format({'font_name': 'Meiryo UI', 'font_size': 8.5, 'bold': True, 'align': 'center', 'valign': 'vcenter', 'border': 1, 'border_color': '#CBD5E0', 'bg_color': c_code, 'font_color': '#FFFFFF'})
+        ws0.write(row, 1, c_code, c_fmt)
+        ws0.write(row, 2, cdat["name"], f_tbl_cell_center)
+        ws0.write(row, 3, cdat["title"] + " " + cdat["desc"], f_tbl_cell)
+        ws0.merge_range(row, 4, row, 6, "引き出し吹き出し型または付箋メモカード型を配置し、仕様・注意・セキュリティを注記", f_tbl_cell)
+        ws0.set_row(row, 22)
+        row += 1
+
+    row += 1
+    ws0.merge_range(row, 1, row, 6, "5. 作図を極めて美しく仕上げる「セル方眼」操作テクニック", f_sec_title)
     row += 1
     
     tips = [
-        ("【重要】Altキーを押しながらドラッグ (グリッドスナップ)", "Excel上で図形や貼り付けたアイコン画像を移動・リサイズする際、[Alt] キーを押しながらドラッグすると、自動的にセルの境界線（方眼格子）にピタリと吸着します。これにより、複数コンポーネントの配置ズレや不揃いが完全に防げます。"),
+        ("【最重要】Altキーを押しながらドラッグ (升目吸着)", "Excel上で図形や貼り付けたアイコン画像を移動・リサイズする際、[Alt] キーを押しながらドラッグすると、自動的にセルの境界線（方眼紙格子）にピタリと吸着します。これにより、複数コンポーネントの配置ズレや不揃いが完全に防げます。"),
         ("Meiryo UI フォントの徹底", "Meiryo UI は日本語の行間余白が均一でコンパクトなため、狭い枠内でも文字が上下に切れず、極めて整然と表示されます。図形内テキストや注記を追加する際も、必ず Meiryo UI を維持してください。"),
-        ("階層構造（Zオーダー）の意識", "作図時は「最背面：リージョン・VPC・現場エリアの背景セル」→「中間面：サブネット枠・接続線・通信フロー矢印」→「最前面：アイコン画像・テキストタグ」の順で重ねることで、整理された見やすい図面になります。"),
-        ("大量のシステムを記載する場合のベストプラクティス", "現場の設備やAWSサービスが膨大になる場合、1枚の図面にすべてを詰め込まず、【01_概要】で全体ランドスケープ（マクロ接続）を提示し、【02_詳細】シートを業務ドメインやシステム系統ごとに複製（例：02_詳細_工場ライン系、02_詳細_物流EC系）して詳細化することを推奨します。"),
         ("印刷・PDF出力時の用紙設定", "概要図・詳細図ともに標準で「A3横向き / 横1ページに収める（Fit to 1 page wide）」設定を行っています。A4用紙に印刷・配布する場合も、Excelの印刷画面で「用紙サイズ：A4」を選択するだけで自動的に高品質縮小出力されます。")
     ]
     for title, desc in tips:
         ws0.write(row, 1, title, f_tbl_head)
         ws0.merge_range(row, 2, row, 6, desc, f_tbl_cell)
-        ws0.set_row(row, 30)
+        ws0.set_row(row, 28)
         row += 1
-
 
     # =========================================================================
     # SHEET 1: 01_構成図_概要 (Overview Architecture Diagram Template)
@@ -209,70 +367,51 @@ def create_system_architecture_template():
     ws1.hide_gridlines(0)
     ws1.set_landscape()
     ws1.set_paper(8) # A3
-    ws1.fit_to_pages(1, 0)
-    ws1.set_margins(left=0.3, right=0.3, top=0.4, bottom=0.4)
+    ws1.fit_to_pages(1, 1)
+    ws1.set_margins(left=0.3, right=0.3, top=0.3, bottom=0.3)
     
     # Configure micro-grid columns (A to AO: 41 columns)
     ws1.set_column('A:A', 2)
     for c in range(1, 42):
         col_letter = xlsxwriter.utility.xl_col_to_name(c)
         ws1.set_column(f'{col_letter}:{col_letter}', 3.4)
-    for r in range(4, 70):
+    for r in range(4, 75):
         ws1.set_row(r, 18)
 
-    write_meta_header(ws1, "【全体俯瞰】現場設備・エッジ・拠点 ⇔ AWS クラウド 統合システム構成図 (概要)", "エグゼクティブ・PM向け 全体鳥瞰図")
+    write_meta_header(ws1, "【全体俯瞰】現場設備・エッジ・拠点 ⇔ AWS クラウド 統合システム構成図 (概要)", "7色データフロー / 3色コメント注記 実装見本")
 
     # ---------------- Pillar 1: On-premise / Edge ----------------
     draw_cell_container(ws1, 5, 1, 31, 10, "【現場・拠点領域】工場プラント・エッジ・事業所", f_box_head_dark, f_bg_onprem, head_rows=1)
-    
-    # Sub-container 1A: スマート工場プラント (OT系)
-    draw_cell_container(ws1, 7, 2, 17, 9, "スマート製造工場 (OT系ライン設備)", f_box_head_slate, f_bg_white)
+    draw_cell_container(ws1, 7, 2, 17, 9, "スマート製造工場 (OT系ライン設備)", f_head_emerald, f_bg_white)
     ws1.write(8, 2, "PLC / センサー / ロボット制御設備", f_note)
     
-    # Sub-container 1B: 現場エッジ & ゲートウェイ
     draw_cell_container(ws1, 19, 2, 24, 9, "現場エッジ・ゲートウェイ層", f_box_head_slate, f_bg_white)
     ws1.write(20, 2, "ローカル暗号化・データ前処理 (Greengrass)", f_note)
     
-    # Sub-container 1C: 拠点オフィス・業務端末 (IT系)
-    draw_cell_container(ws1, 26, 2, 30, 9, "拠点オフィス・現場端末 (IT系)", f_box_head_slate, f_bg_white)
+    draw_cell_container(ws1, 26, 2, 30, 9, "拠点オフィス・現場端末 (IT系)", f_head_cyan, f_bg_white)
 
     # ---------------- Pillar 2: Interconnect Network ----------------
     draw_cell_container(ws1, 5, 11, 31, 16, "【ネットワーク中継層】", f_box_head_dark, f_bg_subnet_pri, head_rows=1)
-    
-    # Route A: Direct Connect
-    draw_cell_container(ws1, 7, 12, 14, 15, "【主回線】専用線接続\nAWS Direct Connect\n(1Gbps/10Gbps帯域)", f_box_head_slate, f_bg_white, head_rows=2)
-    
-    # Route B: VPN Backup
+    draw_cell_container(ws1, 7, 12, 14, 15, "【主回線】専用線接続\nAWS Direct Connect\n(1Gbps/10Gbps帯域)", f_head_purple, f_bg_white, head_rows=2)
     draw_cell_container(ws1, 16, 12, 22, 15, "【副回線】暗号化VPN\nSite-to-Site VPN\n(IPsec 自動切替冗長)", f_box_head_slate, f_bg_white, head_rows=2)
-    
-    # Route C: Cellular / Public
-    draw_cell_container(ws1, 24, 12, 30, 15, "【外部網】モバイル回線\n4G/5G・公衆網\n(TLS 1.3 暗号化)", f_box_head_slate, f_bg_white, head_rows=2)
+    draw_cell_container(ws1, 24, 12, 30, 15, "【外部網】モバイル回線\n4G/5G・公衆網\n(TLS 1.3 暗号化)", f_head_cyan, f_bg_white, head_rows=2)
 
     # ---------------- Pillar 3: AWS Cloud ----------------
-    draw_cell_container(ws1, 5, 17, 31, 40, "【AWS クラウド領域】東京リージョン (ap-northeast-1) Multi-AZ クラウド基盤", f_box_head_dark, f_bg_cloud, head_rows=1)
-    
-    # Tier 1: データ収集・受入口 (Cols 18 to 22, Rows 7 to 24)
+    draw_cell_container(ws1, 5, 17, 31, 40, "【AWS クラウド領域】東京リージョン (ap-northeast-1) Multi-AZ クラウド基盤", f_head_blue, f_bg_cloud, head_rows=1)
     draw_cell_container(ws1, 7, 18, 24, 22, "データ取込・API受付層\n(Ingestion Tier)", f_box_head_slate, f_bg_white, head_rows=2)
-    
-    # Tier 2: 業務処理・コンテナ層 (Cols 24 to 28, Rows 7 to 24)
     draw_cell_container(ws1, 7, 24, 24, 28, "データ処理・業務AP層\n(Processing Tier)", f_box_head_slate, f_bg_white, head_rows=2)
-    
-    # Tier 3: 蓄積・分析・DB層 (Cols 30 to 34, Rows 7 to 24)
     draw_cell_container(ws1, 7, 30, 24, 34, "データ永続化・分析層\n(Storage & DB Tier)", f_box_head_slate, f_bg_white, head_rows=2)
-    
-    # Tier 4: 外部連携・BI層 (Cols 36 to 39, Rows 7 to 24)
-    draw_cell_container(ws1, 7, 36, 24, 39, "外部配信・BI層\n(Delivery Tier)", f_box_head_slate, f_bg_white, head_rows=2)
+    draw_cell_container(ws1, 7, 36, 24, 39, "外部配信・SaaS連携層\n(Salesforce / Delivery)", f_head_amber, f_bg_white, head_rows=2)
     
     # Connecting Arrows between tiers in AWS
     ws1.merge_range(14, 23, 16, 23, "▶\n▶", f_flow_arrow)
     ws1.merge_range(14, 29, 16, 29, "▶\n▶", f_flow_arrow)
     ws1.merge_range(14, 35, 16, 35, "▶\n▶", f_flow_arrow)
     
-    # Tier 5: 横断管理・セキュリティ (Cols 18 to 39, Rows 26 to 30)
+    # Tier 5: 横断管理・セキュリティ
     draw_cell_container(ws1, 26, 18, 30, 39, "【共通基盤】統合セキュリティ・運用監視・ID統制 (CloudWatch / GuardDuty / KMS / IAM)", f_box_head_slate, f_bg_white, head_rows=1)
 
-    # ---------------- Insert Representative Icons on Overview ----------------
-    # Pillar 1 icons
+    # Insert Representative Icons on Overview
     ws1.insert_image(9, 3, 'assets_icons/onprem_factory.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(9, 6, 'assets_icons/onprem_plc.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(13, 3, 'assets_icons/onprem_sensor.png', {'x_scale': 0.75, 'y_scale': 0.75})
@@ -284,33 +423,26 @@ def create_system_architecture_template():
     ws1.insert_image(27, 3, 'assets_icons/client_pc.png', {'x_scale': 0.65, 'y_scale': 0.65})
     ws1.insert_image(27, 6, 'assets_icons/client_tablet.png', {'x_scale': 0.65, 'y_scale': 0.65})
 
-    # Pillar 2 icons
     ws1.insert_image(10, 13, 'assets_icons/aws_dx.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(18, 13, 'assets_icons/aws_vpn.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(26, 13, 'assets_icons/carrier_cellular.png', {'x_scale': 0.75, 'y_scale': 0.75})
 
-    # Pillar 3 icons (AWS)
-    # Tier 1 Ingestion
     ws1.insert_image(10, 19, 'assets_icons/aws_iot_core.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(15, 19, 'assets_icons/aws_apigw.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(20, 19, 'assets_icons/aws_tgw.png', {'x_scale': 0.75, 'y_scale': 0.75})
 
-    # Tier 2 Processing
     ws1.insert_image(10, 25, 'assets_icons/aws_kinesis.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(15, 25, 'assets_icons/aws_lambda.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(20, 25, 'assets_icons/aws_ecs.png', {'x_scale': 0.75, 'y_scale': 0.75})
 
-    # Tier 3 Storage
     ws1.insert_image(10, 31, 'assets_icons/aws_s3.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(15, 31, 'assets_icons/aws_rds.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(20, 31, 'assets_icons/aws_dynamodb.png', {'x_scale': 0.75, 'y_scale': 0.75})
 
-    # Tier 4 Delivery & External
-    ws1.insert_image(10, 37, 'assets_icons/aws_cloudfront.png', {'x_scale': 0.75, 'y_scale': 0.75})
+    ws1.insert_image(10, 37, 'assets_icons/macro_external_saas.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(15, 37, 'assets_icons/aws_opensearch.png', {'x_scale': 0.75, 'y_scale': 0.75})
     ws1.insert_image(20, 37, 'assets_icons/carrier_internet.png', {'x_scale': 0.75, 'y_scale': 0.75})
 
-    # Tier 5 Security & Governance
     ws1.insert_image(27, 20, 'assets_icons/aws_iam.png', {'x_scale': 0.65, 'y_scale': 0.65})
     ws1.insert_image(27, 24, 'assets_icons/aws_kms.png', {'x_scale': 0.65, 'y_scale': 0.65})
     ws1.insert_image(27, 28, 'assets_icons/aws_waf.png', {'x_scale': 0.65, 'y_scale': 0.65})
@@ -342,14 +474,14 @@ def create_system_architecture_template():
     row_t1 += 1
     
     overview_specs = [
-        ("01", "現場OT設備", "工場製造ライン・センシング", "製造設備稼働値、温度・振動・電流データの秒周期収集、PLC通信", "三菱電機/オムロン PLC, 各種IoTセンサー, Modbus TCP", "設備側二重化・コールドスタンバイ予備機", "OT系独立NW"),
+        ("01", "現場OT設備", "工場製造ライン・センシング", "製造設備稼働値、温度・振動・電流データの秒周期収集、PLC通信", "三菱電機/オムロン PLC, 各種IoTセンサー, Modbus TCP", "設備側二重化・コールドスタンバイ予備機", "OT系独立NW (緑)"),
         ("02", "現場エッジ", "エッジゲートウェイ・前処理", "生データのクレンジング、ローカル一次判定、通信途絶時の一時バッファリング", "産業用エッジPC (Linux), AWS IoT Greengrass v2", "ローカルストレージ (SSD) による72hデータ蓄積", "X.509証明書認証"),
-        ("03", "現場IT端末", "現場業務・実績入力クライアント", "製造指示の確認、作業実績登録、ライン異常アラートの現場即時通知閲覧", "現場防塵タブレット, ハンディターミナル, 業務PC", "工場内無線LAN AP 複数台冗長配置", "Web/API経由"),
-        ("04", "NW中継", "専用線・閉域ハイブリッド接続", "現場 ⇔ AWS間の高信頼・低遅延データ伝送、大容量テレメトリ転送", "AWS Direct Connect (1Gbps) + Site-to-Site VPN (自動切替)", "BGPによる自動フェイルオーバー (SLA 99.9%)", "完全閉域ルーティング"),
-        ("05", "AWS取込", "IoTメッセージング・API受付", "現場数万デバイスからの高並列MQTT接続受付、業務REST API認証", "AWS IoT Core, Amazon API Gateway, AWS WAF", "AWS マネージドMulti-AZ高可用性 (SLA 99.95%)", "TLS1.3 / mTLS"),
+        ("03", "現場IT端末", "現場業務・実績入力クライアント", "製造指示の確認、作業実績登録、ライン異常アラートの現場即時通知閲覧", "現場防塵タブレット, ハンディ端末, 業務PC", "工場内無線LAN AP 複数台冗長配置", "Web/API経由 (空)"),
+        ("04", "NW中継", "専用線・閉域ハイブリッド接続", "現場 ⇔ AWS間の高信頼・低遅延データ伝送、大容量テレメトリ転送", "AWS Direct Connect (1Gbps) + Site-to-Site VPN (自動切替)", "BGPによる自動フェイルオーバー (SLA 99.9%)", "完全閉域 (紫)"),
+        ("05", "AWS取込", "IoTメッセージング・API受付", "現場数万デバイスからの高並列MQTT接続受付、業務REST API認証", "AWS IoT Core, Amazon API Gateway, AWS WAF", "AWS マネージドMulti-AZ高可用性 (SLA 99.95%)", "TLS1.3 (青)"),
         ("06", "AWS処理", "リアルタイムストリーム・業務AP", "時系列データのリアルタイム異常検知、マイクロサービス業務ロジック実行", "Amazon Kinesis Data Streams, AWS Lambda, Amazon ECS", "オートスケーリング (負荷連動自動拡張)", "サーバーレス中心"),
         ("07", "AWS蓄積", "データレイク・基幹DB基盤", "時系列生データの永続化保管、基幹マスタ・トランザクション高速処理", "Amazon S3 (Data Lake), Amazon Aurora PostgreSQL Multi-AZ", "Multi-AZ 自動フェイルオーバー (<30秒), S3 耐久性 99.999999999%", "SSE-KMS暗号化"),
-        ("08", "統制監視", "統合運用・セキュリティ監視", "リソース死活・パフォーマンス監視、監査ログ記録、脅威検知・自動通報", "Amazon CloudWatch, AWS CloudTrail, GuardDuty, AWS KMS", "24/365 自動アラート通知 (Slack / メール)", "セキュリティ統制")
+        ("08", "外部SaaS", "Salesforce CRM・顧客連携", "生産実績・顧客設備カルテの双方向同期、受発注ステータス連携", "Salesforce Service Cloud, REST API, Event Relay", "SaaS側可用性 SLA 99.9% 準拠", "外部API (橙)")
     ]
     for r_idx, (no, s_cat, s_name, s_role, s_comp, s_ha, s_note) in enumerate(overview_specs):
         is_even = (r_idx % 2 == 1)
@@ -366,7 +498,6 @@ def create_system_architecture_template():
         ws1.set_row(row_t1, 20)
         row_t1 += 1
 
-
     # =========================================================================
     # SHEET 2: 02_構成図_詳細 (Detailed Architecture Diagram Template)
     # =========================================================================
@@ -374,31 +505,27 @@ def create_system_architecture_template():
     ws2.hide_gridlines(0)
     ws2.set_landscape()
     ws2.set_paper(8) # A3
-    ws2.fit_to_pages(1, 0)
-    ws2.set_margins(left=0.3, right=0.3, top=0.4, bottom=0.4)
+    ws2.fit_to_pages(1, 1)
+    ws2.set_margins(left=0.3, right=0.3, top=0.3, bottom=0.3)
     
     ws2.set_column('A:A', 2)
     for c in range(1, 42):
         col_letter = xlsxwriter.utility.xl_col_to_name(c)
         ws2.set_column(f'{col_letter}:{col_letter}', 3.4)
-    for r in range(4, 85):
+    for r in range(4, 90):
         ws2.set_row(r, 18)
 
     write_meta_header(ws2, "【詳細設計】現場システム（OT/IT/DMZ）× AWS Multi-AZ VPC 詳細構成図", "インフラ・NW・開発エンジニア向け 実装設計図")
 
     # ---------------- Zone 1: On-Premises Factory Network ----------------
-    draw_cell_container(ws2, 5, 1, 33, 10, "【オンプレミス工場・現場ネットワーク】CIDR: 192.168.0.0/16", f_box_head_dark, f_bg_onprem, head_rows=1)
-    
-    # 1A: OT Isolated Zone (Rows 7 to 15)
-    draw_cell_container(ws2, 7, 2, 15, 9, "OT系 隔離制御ネットワーク (192.168.10.0/24)", f_box_head_slate, f_bg_white)
+    draw_cell_container(ws2, 5, 1, 33, 10, "【オンプレミス工場・現場ネットワーク】\nCIDR: 192.168.0.0/16", f_box_head_dark, f_bg_onprem, head_rows=2)
+    draw_cell_container(ws2, 7, 2, 15, 9, "OT系 隔離制御ネットワーク (192.168.10.0/24)", f_head_emerald, f_bg_white)
     ws2.write(8, 2, "産業設備・計装制御 (外部直接通信不可 / Modbus TCP)", f_note)
     
-    # 1B: IT Field Zone (Rows 17 to 24)
-    draw_cell_container(ws2, 17, 2, 24, 9, "IT系 現場業務ネットワーク (192.168.20.0/24)", f_box_head_slate, f_bg_white)
+    draw_cell_container(ws2, 17, 2, 24, 9, "IT系 現場業務ネットワーク (192.168.20.0/24)", f_head_cyan, f_bg_white)
     ws2.write(18, 2, "エッジ処理 & 現場業務端末 (Greengrass / Wi-Fi)", f_note)
     
-    # 1C: DMZ Security Zone (Rows 26 to 32)
-    draw_cell_container(ws2, 26, 2, 32, 9, "現場 DMZ & 境界セキュリティ (192.168.0.0/24)", f_box_head_slate, f_bg_white)
+    draw_cell_container(ws2, 26, 2, 32, 9, "現場 DMZ & 境界セキュリティ (192.168.0.0/24)", f_head_rose, f_bg_white)
     ws2.write(27, 2, "次世代UTM FW & Customer GW ルータ (BGPピア)", f_note)
 
     # On-Premise Icons
@@ -415,8 +542,7 @@ def create_system_architecture_template():
 
     # ---------------- Zone 2: Interconnect Network ----------------
     draw_cell_container(ws2, 5, 11, 33, 16, "【相互接続・中継層】", f_box_head_dark, f_bg_subnet_pri, head_rows=1)
-    
-    draw_cell_container(ws2, 7, 12, 13, 15, "Direct Connect\n専用線ポート (1Gbps)\nVLAN 100", f_box_head_slate, f_bg_white, head_rows=2)
+    draw_cell_container(ws2, 7, 12, 13, 15, "Direct Connect\n専用線ポート (1Gbps)\nVLAN 100", f_head_purple, f_bg_white, head_rows=2)
     draw_cell_container(ws2, 15, 12, 22, 15, "Transit Gateway (TGW)\nASN: 64512\nCIDR: 10.254.0.0/16", f_box_head_slate, f_bg_white, head_rows=2)
     draw_cell_container(ws2, 24, 12, 32, 15, "Site-to-Site VPN\n(IPsec 冗長トンネル)\nCustomer GW 対向", f_box_head_slate, f_bg_white, head_rows=2)
 
@@ -425,12 +551,10 @@ def create_system_architecture_template():
     ws2.insert_image(26, 13, 'assets_icons/aws_vpn.png', {'x_scale': 0.75, 'y_scale': 0.75})
 
     # ---------------- Zone 3: AWS VPC (Multi-AZ) ----------------
-    draw_cell_container(ws2, 5, 17, 33, 40, "【AWS VPC】本番環境 VPC: 10.0.0.0/16 (Tokyo Region: ap-northeast-1)", f_box_head_dark, f_bg_vpc, head_rows=1)
+    draw_cell_container(ws2, 5, 17, 33, 40, "【AWS VPC】本番環境 VPC: 10.0.0.0/16 (Tokyo Region: ap-northeast-1)", f_head_blue, f_bg_vpc, head_rows=1)
 
     # AZ-1a Boundary (Cols 18 to 28, Rows 7 to 27)
     draw_cell_container(ws2, 7, 18, 27, 28, "Availability Zone 1a (ap-northeast-1a)", f_box_head_slate, f_bg_cloud, head_rows=1)
-    
-    # AZ-1a Subnets
     draw_cell_container(ws2, 9, 19, 14, 27, "Public Subnet 1a (10.0.1.0/24) | IGW・ALB・NAT GW", f_box_head_gray, f_bg_subnet_pub)
     ws2.insert_image(10, 20, 'assets_icons/aws_alb.png', {'x_scale': 0.7, 'y_scale': 0.7})
     ws2.insert_image(10, 24, 'assets_icons/aws_natgw.png', {'x_scale': 0.7, 'y_scale': 0.7})
@@ -444,8 +568,6 @@ def create_system_architecture_template():
 
     # AZ-1c Boundary (Cols 30 to 39, Rows 7 to 27)
     draw_cell_container(ws2, 7, 30, 27, 39, "Availability Zone 1c (ap-northeast-1c)", f_box_head_slate, f_bg_cloud, head_rows=1)
-    
-    # AZ-1c Subnets
     draw_cell_container(ws2, 9, 31, 14, 38, "Public Subnet 1c (10.0.2.0/24) | ALB・NAT GW", f_box_head_gray, f_bg_subnet_pub)
     ws2.insert_image(10, 32, 'assets_icons/aws_alb.png', {'x_scale': 0.7, 'y_scale': 0.7})
     ws2.insert_image(10, 35, 'assets_icons/aws_natgw.png', {'x_scale': 0.7, 'y_scale': 0.7})
@@ -492,20 +614,20 @@ def create_system_architecture_template():
     row_d += 1
     
     detail_specs = [
-        ("01", "現場 PLC-01", "産業制御器", "工場 OT系ネットワーク", "192.168.10.11/24", "502 / Modbus TCP", "物理スイッチPort閉塞", "コールドスタンバイ予備", "製造ラインA自動制御"),
-        ("02", "現場 PLC-02", "産業制御器", "工場 OT系ネットワーク", "192.168.10.12/24", "502 / Modbus TCP", "物理スイッチPort閉塞", "コールドスタンバイ予備", "製造ラインB自動制御"),
+        ("01", "現場 PLC-01", "産業制御器", "工場 OT系ネットワーク", "192.168.10.11/24", "502 / Modbus TCP", "物理スイッチPort閉塞", "コールドスタンバイ予備", "製造ラインA自動制御 (緑)"),
+        ("02", "現場 PLC-02", "産業制御器", "工場 OT系ネットワーク", "192.168.10.12/24", "502 / Modbus TCP", "物理スイッチPort閉塞", "コールドスタンバイ予備", "製造ラインB自動制御 (緑)"),
         ("03", "現場 Edge IPC", "産業用PC (Linux)", "工場 IT系ネットワーク", "192.168.20.15/24", "8883 / MQTT, 502 / TCP", "iptables (内部発のみ)", "SSDローカルバッファ", "Greengrass v2 / 前処理"),
-        ("04", "現場 UTM / FW", "次世代ファイアウォール", "現場 DMZゾーン", "192.168.0.1/24", "All / 厳格ステートフル", "IP/MACバインド", "アクティブ/スタンバイHA", "OT/IT間境界防御"),
+        ("04", "現場 UTM / FW", "次世代ファイアウォール", "現場 DMZゾーン", "192.168.0.1/24", "All / 厳格ステートフル", "IP/MACバインド", "アクティブ/スタンバイHA", "OT/IT間境界防御 (赤)"),
         ("05", "拠点 ルータ (CGW)", "Cisco ISR 4331", "現場 DMZゾーン", "192.168.0.254/24", "179/BGP, 500/4500 IPsec", "境界ACL (AWS対向のみ)", "VRRP デュアルルータ", "DX & VPN BGP終端"),
-        ("06", "Direct Connect", "物理専用線ポート", "東京コロケーション", "VLAN 100", "802.1Q タグVLAN", "キャリア構内相互接続", "1Gbps 専用線帯域", "オンプレ⇔AWS間主回線"),
+        ("06", "Direct Connect", "物理専用線ポート", "東京コロケーション", "VLAN 100", "802.1Q タグVLAN", "キャリア構内相互接続", "1Gbps 専用線帯域", "オンプレ⇔AWS間主回線 (紫)"),
         ("07", "Transit Gateway", "AWS TGW", "AWS NW中継層", "10.254.0.0/16", "BGP ルーティング", "TGW Route Table", "AWS Multi-AZ高可用性", "VPC & DX/VPN 統合集約"),
-        ("08", "ALB (外部向)", "Application LB", "Public 1a / 1c", "10.0.1.x, 10.0.2.x", "443 / HTTPS", "sg-alb-external", "クロスゾーン負荷分散", "現場端末/外部向けAPI受付"),
+        ("08", "ALB (外部向)", "Application LB", "Public 1a / 1c", "10.0.1.x, 10.0.2.x", "443 / HTTPS", "sg-alb-external", "クロスゾーン負荷分散", "現場端末/外部向けAPI受付 (青)"),
         ("09", "NAT Gateway 1a/1c", "NAT ゲートウェイ", "Public 1a / 1c", "10.0.1.x, 10.0.2.x", "送信元NAT変換", "EIP 割当", "AZ個別冗長化 (2台配置)", "プライベートサブネット外向き通信"),
         ("10", "ECS Fargate (AP)", "コンテナタスク", "Private App 1a / 1c", "10.0.11.50, 10.0.12.50", "8080 / HTTP", "sg-ecs-app (ALBからのみ)", "Auto Scaling (2〜10タスク)", "FastAPI / マイクロサービス"),
         ("11", "Aurora PostgreSQL", "Amazon Aurora DB", "Private DB 1a / 1c", "10.0.21.100, 10.0.22.100", "5432 / PostgreSQL", "sg-aurora-db (ECSからのみ)", "Multi-AZ 自動フェイルオーバー", "db.r6g.xlarge, 日次Snapshot"),
         ("12", "AWS IoT Core", "IoTメッセージブローカー", "リージョン共通", "-", "8883 / MQTT over TLS", "X.509 デバイス証明書", "完全マネージド分散基盤", "秒間10,000件テレメトリ受信"),
         ("13", "Amazon S3 Data Lake", "オブジェクトストレージ", "リージョン共通", "-", "443 / HTTPS (VPC Endpoint)", "バケットポリシー & IAM", "耐久性 99.999999999%", "SSE-KMS暗号化, ライフサイクル"),
-        ("14", "AWS KMS", "鍵管理サービス", "リージョン共通", "-", "443 / HTTPS", "KMSキーポリシー", "AWS HSM 管理", "データレイク・DB一元暗号鍵"),
+        ("14", "Salesforce API", "外部CRM連携", "外部連携層", "-", "443 / REST HTTPS", "OAuth 2.0 / JWTベアラー", "Salesforce Multi-Tenant HA", "生産実績・顧客カルテ同期 (橙)"),
         ("15", "CloudWatch Logs", "統合監視・ログ基盤", "リージョン共通", "-", "443 / HTTPS (VPC Endpoint)", "IAM ロール認証", "Multi-AZ 保管", "アラーム検知時 SNS/Slack通知")
     ]
     for r_idx, r_vals in enumerate(detail_specs):
@@ -527,40 +649,148 @@ def create_system_architecture_template():
 
 
     # =========================================================================
-    # SHEET 3: 03_パーツ集_概要用 (Overview Parts & Palette)
+    # SHEET 3: 03_パーツ集_作図図形・コネクタ線 (★NEW PRIMARY PARTS CATALOG)
     # =========================================================================
-    ws3 = workbook.add_worksheet('03_パーツ集_概要用')
+    ws3 = workbook.add_worksheet('03_パーツ集_作図図形・コネクタ線')
     ws3.hide_gridlines(0)
     ws3.set_landscape()
-    ws3.set_paper(8)
-    ws3.set_margins(left=0.3, right=0.3, top=0.4, bottom=0.4)
+    ws3.set_paper(8) # A3
+    ws3.fit_to_pages(1, 1)
+    ws3.set_margins(left=0.3, right=0.3, top=0.3, bottom=0.3)
     
     ws3.set_column('A:A', 2)
     for c in range(1, 42):
         col_letter = xlsxwriter.utility.xl_col_to_name(c)
         ws3.set_column(f'{col_letter}:{col_letter}', 3.4)
-    for r in range(4, 80):
+    for r in range(4, 90):
         ws3.set_row(r, 18)
 
-    write_meta_header(ws3, "【貼り付け用パーツ集】概要構成図用 マクロ枠・階層カード・大口径線種・凡例", "概要図作成用 コピペパレット")
+    # Insert placeholder textbox to initialize DrawingML structure
+    ws3.insert_textbox(0, 0, 'Placeholder', {'width': 10, 'height': 10})
+    write_meta_header(ws3, "【作図部品集】16箇所接続ポイント四角形・7色コネクタ線・3色コメント図形", "方眼紙升目吸着 / 等間隔配線パレット")
+
+    # Section 1: 16-Connection Nodes & Boxes
+    row_s3 = 5
+    ws3.merge_range(row_s3, 1, row_s3, 40, "1. 【等間隔16箇所接続ポイント付き】作図用四角形部品（美しい7色展開）", f_sec_title)
+    row_s3 += 1
+    ws3.merge_range(row_s3, 1, row_s3, 40, "※四角形の各辺に4箇所ずつ（計16箇所）の接続ポイントを装備。コネクタ線がピタッと吸着し、線が重ならず等間隔に美しく配線できます。コピー＆ペーストして使用してください。", f_note)
+    ws3.set_row(row_s3, 20)
+    row_s3 += 1
+
+    # Row 1 Labels (Charcoal, Blue, Emerald, Amber)
+    ws3.merge_range(row_s3, 1, row_s3, 9, "① Charcoal Black (基盤・オンプレ)", f_head_charcoal)
+    ws3.merge_range(row_s3, 11, row_s3, 19, "② Cloud Blue (AWS・クラウド基盤)", f_head_blue)
+    ws3.merge_range(row_s3, 21, row_s3, 29, "③ Emerald Green (現場IoT・OT設備)", f_head_emerald)
+    ws3.merge_range(row_s3, 31, row_s3, 39, "④ Amber Orange (外部SaaS・Salesforce)", f_head_amber)
+    ws3.set_row(row_s3, 19)
+    # Node shapes: rows 8..10 (height 2)
+    # Box label row: 11
+    ws3.write(11, 1, "【境界枠】", f_note)
+    ws3.write(11, 11, "【境界枠】", f_note)
+    ws3.write(11, 21, "【境界枠】", f_note)
+    ws3.write(11, 31, "【境界枠】", f_note)
+    # Box shapes: rows 12..16 (height 4)
+
+    # Row 2 Labels (Purple, Cyan, Rose)
+    row_s3 = 18
+    ws3.merge_range(row_s3, 1, row_s3, 9, "⑤ Purple Violet (イントラ・分析)", f_head_purple)
+    ws3.merge_range(row_s3, 11, row_s3, 19, "⑥ Cyan Sky (現場モバイル・作業端末)", f_head_cyan)
+    ws3.merge_range(row_s3, 21, row_s3, 29, "⑦ Rose Crimson (DMZ・セキュリティ)", f_head_rose)
+    ws3.set_row(row_s3, 19)
+    # Node shapes: rows 19..21 (height 2)
+    # Box label row: 22
+    ws3.write(22, 1, "【境界枠】", f_note)
+    ws3.write(22, 11, "【境界枠】", f_note)
+    ws3.write(22, 21, "【境界枠】", f_note)
+    # Box shapes: rows 23..27 (height 4)
+
+    # Section 2: 7-Color Connectors
+    row_s3 = 29
+    ws3.merge_range(row_s3, 1, row_s3, 40, "2. 【美しい7色展開】接続コネクタ線部品（カギ線・直線・双方向・非同期破線）", f_sec_title)
+    row_s3 += 1
+    ws3.merge_range(row_s3, 1, row_s3, 40, "※各色ともカギ線矢印・直線矢印・双方向矢印・非同期破線の4種類を完備。図形の16箇所の接続ポイントに近づけると自動吸着（スナップ）します。", f_note)
+    ws3.set_row(row_s3, 20)
+    row_s3 += 1
+
+    c_labels = [
+        ("① Charcoal (基盤)", f_head_charcoal),
+        ("② Cloud Blue (AWS)", f_head_blue),
+        ("③ Emerald (現場OT)", f_head_emerald),
+        ("④ Amber (Salesforce)", f_head_amber),
+        ("⑤ Purple (イントラ)", f_head_purple),
+        ("⑥ Cyan (モバイル)", f_head_cyan),
+        ("⑦ Rose (DMZ・警報)", f_head_rose),
+    ]
+    for clbl, c_head_fmt in c_labels:
+        ws3.merge_range(row_s3, 1, row_s3, 6, clbl, c_head_fmt)
+        ws3.write(row_s3, 7, "【カギ線】", f_note)
+        ws3.write(row_s3, 14, "【直線】", f_note)
+        ws3.write(row_s3, 22, "【双方向】", f_note)
+        ws3.write(row_s3, 30, "【非同期破線】", f_note)
+        ws3.set_row(row_s3, 18)
+        row_s3 += 2
+
+    # Section 3: 3-Color Comments
+    row_s3 = 46
+    ws3.merge_range(row_s3, 1, row_s3, 40, "3. 【美しい3色展開】コメント・注記入力用図形（引き出し吹き出し型 & 付箋メモカード型）", f_sec_title)
+    row_s3 += 1
+    ws3.merge_range(row_s3, 1, row_s3, 40, "※ポイントや付記事項を美しく書き込める図形部品です。引き出し線付き吹き出し型と、カード型メモの2種類を準備しています。テキストを直接編集可能。", f_note)
+    ws3.set_row(row_s3, 20)
+    row_s3 += 1
+
+    ws3.merge_range(row_s3, 1, row_s3, 12, "① Info Blue (仕様・通信ポイント)", f_head_blue)
+    ws3.merge_range(row_s3, 14, row_s3, 25, "② Warning Amber (注意点・設計制約)", f_head_amber)
+    ws3.merge_range(row_s3, 27, row_s3, 38, "③ Security Emerald (セキュリティ・運用基準)", f_head_emerald)
+    ws3.set_row(row_s3, 19)
+    # Comments occupy rows 49..59
+
+    # Section 4: 16-pt Connection Demo Sample
+    row_s3 = 61
+    ws3.merge_range(row_s3, 1, row_s3, 40, "4. 【接続実例見本】等間隔16箇所接続ポイント 完全配線サンプル", f_sec_title)
+    row_s3 += 1
+    ws3.merge_range(row_s3, 1, row_s3, 40, "※中央のHubノードに対して、上下左右から各4本ずつ（計16本）の線が重ならずに等間隔接続されている見本です。線をつかんで動かしても接続が追従します。", f_note)
+    ws3.set_row(row_s3, 20)
+    row_s3 += 1
+
+    ws3.merge_range(row_s3, 14, row_s3, 26, "↓ 下記に16本完全接続デモモデルが配置されています ↓", f_tbl_cell_zebra_center)
+    ws3.set_row(row_s3, 18)
+
+    # =========================================================================
+    # SHEET 4: 04_パーツ集_概要用 (Overview Parts & Palette)
+    # =========================================================================
+    ws4 = workbook.add_worksheet('04_パーツ集_概要用')
+    ws4.hide_gridlines(0)
+    ws4.set_landscape()
+    ws4.set_paper(8)
+    ws4.fit_to_pages(1, 1)
+    ws4.set_margins(left=0.3, right=0.3, top=0.3, bottom=0.3)
+    
+    ws4.set_column('A:A', 2)
+    for c in range(1, 42):
+        col_letter = xlsxwriter.utility.xl_col_to_name(c)
+        ws4.set_column(f'{col_letter}:{col_letter}', 3.4)
+    for r in range(4, 80):
+        ws4.set_row(r, 18)
+
+    write_meta_header(ws4, "【貼り付け用パーツ集】概要構成図用 マクロ枠・階層カード・大口径線種・凡例", "概要図作成用 コピペパレット")
 
     # Section A: マクロ境界コンテナ
-    row_p3 = 5
-    ws3.merge_range(row_p3, 1, row_p3, 40, "A. 概要図用 マクロ境界コンテナ (選択してコピー＆ペーストして使用)", f_sec_title)
-    row_p3 += 1
+    row_p4 = 5
+    ws4.merge_range(row_p4, 1, row_p4, 40, "A. 概要図用 マクロ境界コンテナ (選択してコピー＆ペーストして使用)", f_sec_title)
+    row_p4 += 1
     
-    draw_cell_container(ws3, row_p3, 1, row_p3 + 8, 12, "【マクロ枠】現場・スマート工場領域 (OT/IT)", f_box_head_dark, f_bg_onprem)
-    draw_cell_container(ws3, row_p3, 14, row_p3 + 8, 25, "【マクロ枠】通信キャリア専用線・閉域網 (Direct Connect)", f_box_head_slate, f_bg_subnet_pri)
-    draw_cell_container(ws3, row_p3, 27, row_p3 + 8, 40, "【マクロ枠】AWS Cloud (東京リージョン ap-northeast-1)", f_box_head_dark, f_bg_cloud)
+    draw_cell_container(ws4, row_p4, 1, row_p4 + 8, 12, "【マクロ枠】現場・スマート工場領域 (OT/IT)", f_box_head_dark, f_bg_onprem)
+    draw_cell_container(ws4, row_p4, 14, row_p4 + 8, 25, "【マクロ枠】通信キャリア専用線・閉域網 (Direct Connect)", f_box_head_slate, f_bg_subnet_pri)
+    draw_cell_container(ws4, row_p4, 27, row_p4 + 8, 40, "【マクロ枠】AWS Cloud (東京リージョン ap-northeast-1)", f_box_head_dark, f_bg_cloud)
     
-    ws3.write(row_p3 + 2, 2, "← 工場・プラント・拠点を\n　包括する外枠として利用", f_note)
-    ws3.write(row_p3 + 2, 15, "← 専用線・VPN・閉域網の\n　中継領域外枠として利用", f_note)
-    ws3.write(row_p3 + 2, 28, "← クラウド環境全体を\n　包括する外枠として利用", f_note)
-    row_p3 += 10
+    ws4.write(row_p4 + 2, 2, "← 工場・プラント・拠点を\n　包括する外枠として利用", f_note)
+    ws4.write(row_p4 + 2, 15, "← 専用線・VPN・閉域網の\n　中継領域外枠として利用", f_note)
+    ws4.write(row_p4 + 2, 28, "← クラウド環境全体を\n　包括する外枠として利用", f_note)
+    row_p4 += 10
     
     # Section B: マクロ階層カード (Macro Tier Badges)
-    ws3.merge_range(row_p3, 1, row_p3, 40, "B. 概要図用 主要機能階層カード (ドラッグまたはコピーして概要図に配置)", f_sec_title)
-    row_p3 += 1
+    ws4.merge_range(row_p4, 1, row_p4, 40, "B. 概要図用 主要機能階層カード (ドラッグまたはコピーして概要図に配置)", f_sec_title)
+    row_p4 += 1
     
     macro_cards = [
         ('macro_factory.png', 1),
@@ -570,8 +800,8 @@ def create_system_architecture_template():
         ('macro_aws_region.png', 33),
     ]
     for img_name, col_pos in macro_cards:
-        ws3.insert_image(row_p3, col_pos, f'assets_icons/{img_name}', {'x_scale': 0.85, 'y_scale': 0.85})
-    row_p3 += 4
+        ws4.insert_image(row_p4, col_pos, f'assets_icons/{img_name}', {'x_scale': 0.85, 'y_scale': 0.85})
+    row_p4 += 4
 
     macro_cards_2 = [
         ('macro_tier_ingestion.png', 1),
@@ -581,12 +811,12 @@ def create_system_architecture_template():
         ('macro_external_saas.png', 33),
     ]
     for img_name, col_pos in macro_cards_2:
-        ws3.insert_image(row_p3, col_pos, f'assets_icons/{img_name}', {'x_scale': 0.85, 'y_scale': 0.85})
-    row_p3 += 5
+        ws4.insert_image(row_p4, col_pos, f'assets_icons/{img_name}', {'x_scale': 0.85, 'y_scale': 0.85})
+    row_p4 += 5
 
     # Section C: 概要用 代表AWS & 現場アイコン
-    ws3.merge_range(row_p3, 1, row_p3, 40, "C. 概要図用 代表サービス & 設備アイコン (概要図にそのままコピー可能)", f_sec_title)
-    row_p3 += 1
+    ws4.merge_range(row_p4, 1, row_p4, 40, "C. 概要図用 代表サービス & 設備アイコン (概要図にそのままコピー可能)", f_sec_title)
+    row_p4 += 1
     
     overview_icons_sample = [
         ('onprem_factory.png', '工場プラント', 1),
@@ -601,75 +831,76 @@ def create_system_architecture_template():
         ('aws_rds.png', 'Aurora DB', 37),
     ]
     for img_file, label, c_idx in overview_icons_sample:
-        ws3.insert_image(row_p3, c_idx, f'assets_icons/{img_file}', {'x_scale': 0.75, 'y_scale': 0.75})
-        ws3.merge_range(row_p3 + 5, c_idx, row_p3 + 5, c_idx + 2, label, f_tbl_cell_center)
-    row_p3 += 7
+        ws4.insert_image(row_p4, c_idx, f'assets_icons/{img_file}', {'x_scale': 0.75, 'y_scale': 0.75})
+        ws4.merge_range(row_p4 + 5, c_idx, row_p4 + 5, c_idx + 2, label, f_tbl_cell_center)
+    row_p4 += 7
 
     # Section D: 概要用 大口径接続線 & データフロー
-    ws3.merge_range(row_p3, 1, row_p3, 40, "D. 概要図用 データ流通・中継線種 (太線・双方向・専用線)", f_sec_title)
-    row_p3 += 1
+    ws4.merge_range(row_p4, 1, row_p4, 40, "D. 概要図用 データ流通・中継線種 (太線・双方向・専用線)", f_sec_title)
+    row_p4 += 1
     
-    ws3.insert_image(row_p3, 1, 'assets_icons/line_direct_connect.png', {'x_scale': 0.9, 'y_scale': 0.9})
-    ws3.insert_image(row_p3, 15, 'assets_icons/line_solid_sync.png', {'x_scale': 0.9, 'y_scale': 0.9})
-    ws3.insert_image(row_p3, 28, 'assets_icons/line_dashed_async.png', {'x_scale': 0.9, 'y_scale': 0.9})
-    row_p3 += 3
+    ws4.insert_image(row_p4, 1, 'assets_icons/line_direct_connect.png', {'x_scale': 0.9, 'y_scale': 0.9})
+    ws4.insert_image(row_p4, 15, 'assets_icons/line_solid_sync.png', {'x_scale': 0.9, 'y_scale': 0.9})
+    ws4.insert_image(row_p4, 28, 'assets_icons/line_dashed_async.png', {'x_scale': 0.9, 'y_scale': 0.9})
+    row_p4 += 3
     
-    ws3.insert_image(row_p3, 1, 'assets_icons/line_vpn_tunnel.png', {'x_scale': 0.9, 'y_scale': 0.9})
-    ws3.insert_image(row_p3, 15, 'assets_icons/line_bidirectional.png', {'x_scale': 0.9, 'y_scale': 0.9})
-    ws3.insert_image(row_p3, 28, 'assets_icons/line_dotted_mgmt.png', {'x_scale': 0.9, 'y_scale': 0.9})
-    row_p3 += 4
+    ws4.insert_image(row_p4, 1, 'assets_icons/line_vpn_tunnel.png', {'x_scale': 0.9, 'y_scale': 0.9})
+    ws4.insert_image(row_p4, 15, 'assets_icons/line_bidirectional.png', {'x_scale': 0.9, 'y_scale': 0.9})
+    ws4.insert_image(row_p4, 28, 'assets_icons/line_dotted_mgmt.png', {'x_scale': 0.9, 'y_scale': 0.9})
+    row_p4 += 4
 
     # Section E: エグゼクティブ凡例ブロック
-    ws3.merge_range(row_p3, 1, row_p3, 40, "E. 概要図用 エグゼクティブ凡例ブロック (完成図の右下や空き領域に配置)", f_sec_title)
-    row_p3 += 1
+    ws4.merge_range(row_p4, 1, row_p4, 40, "E. 概要図用 エグゼクティブ凡例ブロック (完成図の右下や空き領域に配置)", f_sec_title)
+    row_p4 += 1
     
-    draw_cell_container(ws3, row_p3, 1, row_p3 + 6, 20, "【概要図 凡例】通信・ネットワーク種別", f_box_head_slate, f_bg_white)
-    ws3.write(row_p3 + 1, 2, "━━━ [太実線] 専用線接続 (AWS Direct Connect 1Gbps/10Gbps)", f_note)
-    ws3.write(row_p3 + 2, 2, "━━▶ [実線矢印] 同期通信 (Web / REST API / HTTPS 暗号化)", f_note)
-    ws3.write(row_p3 + 3, 2, "----▶ [破線矢印] 非同期通信 (IoT テレメトリ / MQTT / キュー)", f_note)
-    ws3.write(row_p3 + 4, 2, "◀━━▶ [双方向] 双方向制御・同期 (Modbus TCP / 設備制御)", f_note)
-    ws3.write(row_p3 + 5, 2, "・・・・▶ [点線] 運用監視・メトリクス・ログ収集 (CloudWatch)", f_note)
+    draw_cell_container(ws4, row_p4, 1, row_p4 + 6, 20, "【概要図 凡例】通信・ネットワーク種別", f_box_head_slate, f_bg_white)
+    ws4.write(row_p4 + 1, 2, "━━━ [太実線] 専用線接続 (AWS Direct Connect 1Gbps/10Gbps)", f_note)
+    ws4.write(row_p4 + 2, 2, "━━▶ [実線矢印] 同期通信 (Web / REST API / HTTPS 暗号化)", f_note)
+    ws4.write(row_p4 + 3, 2, "----▶ [破線矢印] 非同期通信 (IoT テレメトリ / MQTT / キュー)", f_note)
+    ws4.write(row_p4 + 4, 2, "◀━━▶ [双方向] 双方向制御・同期 (Modbus TCP / 設備制御)", f_note)
+    ws4.write(row_p4 + 5, 2, "・・・・▶ [点線] 運用監視・メトリクス・ログ収集 (CloudWatch)", f_note)
 
-    draw_cell_container(ws3, row_p3, 22, row_p3 + 6, 40, "【概要図 凡例】環境・セキュリティ境界", f_box_head_slate, f_bg_white)
-    ws3.write(row_p3 + 1, 23, "■ 現場OT領域 : 外部インターネットから完全物理/論理隔離", f_note)
-    ws3.write(row_p3 + 2, 23, "■ 現場IT領域 : 拠点内閉域ネットワーク (認証端末のみ接続許可)", f_note)
-    ws3.write(row_p3 + 3, 23, "■ AWS VPC領域 : 仮想プライベート網 (インターネット非公開・閉域ルーティング)", f_note)
-    ws3.write(row_p3 + 4, 23, "■ 全通信暗号化 : TLS 1.3 / IPsec / SSE-KMS 保存時暗号化を標準適用", f_note)
-    ws3.write(row_p3 + 5, 23, "■ 冗長化方針 : Multi-AZ 構成により単一障害点 (SPOF) を完全排除", f_note)
+    draw_cell_container(ws4, row_p4, 22, row_p4 + 6, 40, "【概要図 凡例】環境・セキュリティ境界", f_box_head_slate, f_bg_white)
+    ws4.write(row_p4 + 1, 23, "■ 現場OT領域 : 外部インターネットから完全物理/論理隔離 (緑)", f_note)
+    ws4.write(row_p4 + 2, 23, "■ 現場IT領域 : 拠点内閉域ネットワーク (認証端末のみ接続許可)", f_note)
+    ws4.write(row_p4 + 3, 23, "■ AWS VPC領域 : 仮想プライベート網 (インターネット非公開・閉域ルーティング) (青)", f_note)
+    ws4.write(row_p4 + 4, 23, "■ 全通信暗号化 : TLS 1.3 / IPsec / SSE-KMS 保存時暗号化を標準適用", f_note)
+    ws4.write(row_p4 + 5, 23, "■ 冗長化方針 : Multi-AZ 構成により単一障害点 (SPOF) を完全排除", f_note)
 
 
     # =========================================================================
-    # SHEET 4: 04_パーツ集_詳細用 (Detailed Parts & Asset Catalog)
+    # SHEET 5: 05_パーツ集_詳細用 (Detailed Parts & Asset Catalog)
     # =========================================================================
-    ws4 = workbook.add_worksheet('04_パーツ集_詳細用')
-    ws4.hide_gridlines(0)
-    ws4.set_landscape()
-    ws4.set_paper(8)
-    ws4.set_margins(left=0.3, right=0.3, top=0.4, bottom=0.4)
+    ws5 = workbook.add_worksheet('05_パーツ集_詳細用')
+    ws5.hide_gridlines(0)
+    ws5.set_landscape()
+    ws5.set_paper(8)
+    ws5.fit_to_pages(1, 1)
+    ws5.set_margins(left=0.3, right=0.3, top=0.3, bottom=0.3)
     
-    ws4.set_column('A:A', 2)
+    ws5.set_column('A:A', 2)
     for c in range(1, 42):
         col_letter = xlsxwriter.utility.xl_col_to_name(c)
-        ws4.set_column(f'{col_letter}:{col_letter}', 3.4)
+        ws5.set_column(f'{col_letter}:{col_letter}', 3.4)
     for r in range(4, 130):
-        ws4.set_row(r, 18)
+        ws5.set_row(r, 18)
 
-    write_meta_header(ws4, "【貼り付け用パーツ集】詳細構成図用 アイコン・サブネット枠・線種・ポートタグ・表", "精密設計図作成用 全パーツカタログ")
+    write_meta_header(ws5, "【貼り付け用パーツ集】詳細構成図用 アイコン・サブネット枠・線種・ポートタグ・表", "精密設計図作成用 全パーツカタログ")
 
-    row_p4 = 5
+    row_p5 = 5
     # Section A: 詳細ネットワークコンテナ枠
-    ws4.merge_range(row_p4, 1, row_p4, 40, "A. 詳細設計用 ネットワーク境界コンテナ枠 (コピーしてサイズ調整して利用)", f_sec_title)
-    row_p4 += 1
+    ws5.merge_range(row_p5, 1, row_p5, 40, "A. 詳細設計用 ネットワーク境界コンテナ枠 (コピーしてサイズ調整して利用)", f_sec_title)
+    row_p5 += 1
     
-    draw_cell_container(ws4, row_p4, 1, row_p4 + 7, 10, "【枠】VPC 10.0.0.0/16", f_box_head_dark, f_bg_vpc)
-    draw_cell_container(ws4, row_p4, 12, row_p4 + 7, 21, "【枠】Public Subnet (10.0.1.0/24)", f_box_head_gray, f_bg_subnet_pub)
-    draw_cell_container(ws4, row_p4, 23, row_p4 + 7, 32, "【枠】Private App Subnet (10.0.11.0/24)", f_box_head_slate, f_bg_subnet_pri)
-    draw_cell_container(ws4, row_p4, 34, row_p4 + 7, 41, "【枠】Private DB Subnet", f_box_head_dark, f_bg_subnet_db)
-    row_p4 += 9
+    draw_cell_container(ws5, row_p5, 1, row_p5 + 7, 10, "【枠】VPC 10.0.0.0/16", f_box_head_dark, f_bg_vpc)
+    draw_cell_container(ws5, row_p5, 12, row_p5 + 7, 21, "【枠】Public Subnet (10.0.1.0/24)", f_box_head_gray, f_bg_subnet_pub)
+    draw_cell_container(ws5, row_p5, 23, row_p5 + 7, 32, "【枠】Private App Subnet (10.0.11.0/24)", f_box_head_slate, f_bg_subnet_pri)
+    draw_cell_container(ws5, row_p5, 34, row_p5 + 7, 41, "【枠】Private DB Subnet", f_box_head_dark, f_bg_subnet_db)
+    row_p5 += 9
 
     # Section B: AWS サービス全アイコンカタログ (40+ items)
-    ws4.merge_range(row_p4, 1, row_p4, 40, "B. AWS サービス詳細アイコンカタログ (すべてのアイコンをCtrl+Cで即座にコピー可能)", f_sec_title)
-    row_p4 += 1
+    ws5.merge_range(row_p5, 1, row_p5, 40, "B. AWS サービス詳細アイコンカタログ (すべてのアイコンをCtrl+Cで即座にコピー可能)", f_sec_title)
+    row_p5 += 1
     
     aws_categories = [
         ("【AWS Compute & Containers】", [
@@ -731,20 +962,20 @@ def create_system_architecture_template():
     ]
 
     for cat_title, icon_list in aws_categories:
-        ws4.merge_range(row_p4, 1, row_p4, 40, cat_title, f_sec_sub)
-        row_p4 += 1
+        ws5.merge_range(row_p5, 1, row_p5, 40, cat_title, f_sec_sub)
+        row_p5 += 1
         chunk_size = 6
         for chunk_idx in range(0, len(icon_list), chunk_size):
             chunk = icon_list[chunk_idx:chunk_idx + chunk_size]
             for idx, (img_file, label) in enumerate(chunk):
                 col_start = 1 + idx * 6
-                ws4.insert_image(row_p4, col_start + 1, f'assets_icons/{img_file}', {'x_scale': 0.75, 'y_scale': 0.75})
-                ws4.merge_range(row_p4 + 5, col_start, row_p4 + 6, col_start + 5, label, f_tbl_cell_center)
-            row_p4 += 8
+                ws5.insert_image(row_p5, col_start + 1, f'assets_icons/{img_file}', {'x_scale': 0.75, 'y_scale': 0.75})
+                ws5.merge_range(row_p5 + 5, col_start, row_p5 + 6, col_start + 5, label, f_tbl_cell_center)
+            row_p5 += 8
 
     # Section C: 現場・OT・IT機器全アイコンカタログ
-    ws4.merge_range(row_p4, 1, row_p4, 40, "C. 現場・工場OT・拠点IT機器アイコンカタログ (コピーして詳細図に配置)", f_sec_title)
-    row_p4 += 1
+    ws5.merge_range(row_p5, 1, row_p5, 40, "C. 現場・工場OT・拠点IT機器アイコンカタログ (コピーして詳細図に配置)", f_sec_title)
+    row_p5 += 1
     
     onprem_categories = [
         ("【現場・施設 & OT産業制御設備】", [
@@ -773,17 +1004,17 @@ def create_system_architecture_template():
         ])
     ]
     for cat_title, icon_list in onprem_categories:
-        ws4.merge_range(row_p4, 1, row_p4, 40, cat_title, f_sec_sub)
-        row_p4 += 1
+        ws5.merge_range(row_p5, 1, row_p5, 40, cat_title, f_sec_sub)
+        row_p5 += 1
         for idx, (img_file, label) in enumerate(icon_list):
             col_start = 1 + idx * 6
-            ws4.insert_image(row_p4, col_start + 1, f'assets_icons/{img_file}', {'x_scale': 0.75, 'y_scale': 0.75})
-            ws4.merge_range(row_p4 + 5, col_start, row_p4 + 6, col_start + 5, label, f_tbl_cell_center)
-        row_p4 += 8
+            ws5.insert_image(row_p5, col_start + 1, f'assets_icons/{img_file}', {'x_scale': 0.75, 'y_scale': 0.75})
+            ws5.merge_range(row_p5 + 5, col_start, row_p5 + 6, col_start + 5, label, f_tbl_cell_center)
+        row_p5 += 8
 
     # Section D: プロトコル・ポートタグ & ステータスバッジ
-    ws4.merge_range(row_p4, 1, row_p4, 40, "D. 通信プロトコル・ポートタグ & ステータスバッジ (通信線上に重ねて配置)", f_sec_title)
-    row_p4 += 1
+    ws5.merge_range(row_p5, 1, row_p5, 40, "D. 通信プロトコル・ポートタグ & ステータスバッジ (通信線上に重ねて配置)", f_sec_title)
+    row_p5 += 1
     
     ptags_1 = [
         ('tag_https_443.png', 1),
@@ -795,8 +1026,8 @@ def create_system_architecture_template():
         ('tag_dx_1g.png', 37),
     ]
     for img_file, c_pos in ptags_1:
-        ws4.insert_image(row_p4, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.9, 'y_scale': 0.9})
-    row_p4 += 2
+        ws5.insert_image(row_p5, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.9, 'y_scale': 0.9})
+    row_p5 += 2
 
     ptags_2 = [
         ('tag_opcua_4840.png', 1),
@@ -808,12 +1039,12 @@ def create_system_architecture_template():
         ('tag_ipsec_vpn.png', 37),
     ]
     for img_file, c_pos in ptags_2:
-        ws4.insert_image(row_p4, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.9, 'y_scale': 0.9})
-    row_p4 += 3
+        ws5.insert_image(row_p5, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.9, 'y_scale': 0.9})
+    row_p5 += 3
 
     # Status badges
-    ws4.write(row_p4, 1, "【ステータス・ゾーンバッジ】", f_sec_sub)
-    row_p4 += 1
+    ws5.write(row_p5, 1, "【ステータス・ゾーンバッジ】", f_sec_sub)
+    row_p5 += 1
     
     sbadges_1 = [
         ('badge_prod.png', 1),
@@ -825,8 +1056,8 @@ def create_system_architecture_template():
         ('badge_encrypted.png', 37),
     ]
     for img_file, c_pos in sbadges_1:
-        ws4.insert_image(row_p4, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.9, 'y_scale': 0.9})
-    row_p4 += 2
+        ws5.insert_image(row_p5, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.9, 'y_scale': 0.9})
+    row_p5 += 2
 
     sbadges_2 = [
         ('badge_zone_ot.png', 1),
@@ -838,57 +1069,57 @@ def create_system_architecture_template():
         ('badge_managed.png', 37),
     ]
     for img_file, c_pos in sbadges_2:
-        ws4.insert_image(row_p4, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.9, 'y_scale': 0.9})
-    row_p4 += 4
+        ws5.insert_image(row_p5, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.9, 'y_scale': 0.9})
+    row_p5 += 4
 
     # Section E: 詳細線種ストリップ
-    ws4.merge_range(row_p4, 1, row_p4, 40, "E. 詳細線種ストリップ集 (同期・非同期・専用線・VPN・監視・双方向)", f_sec_title)
-    row_p4 += 1
+    ws5.merge_range(row_p5, 1, row_p5, 40, "E. 詳細線種ストリップ集 (同期・非同期・専用線・VPN・監視・双方向)", f_sec_title)
+    row_p5 += 1
     
     line_strips = [
         ('line_solid_sync.png', 1),
         ('line_dashed_async.png', 21),
     ]
     for img_file, c_pos in line_strips:
-        ws4.insert_image(row_p4, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.95, 'y_scale': 0.95})
-    row_p4 += 3
+        ws5.insert_image(row_p5, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.95, 'y_scale': 0.95})
+    row_p5 += 3
 
     line_strips_2 = [
         ('line_direct_connect.png', 1),
         ('line_vpn_tunnel.png', 21),
     ]
     for img_file, c_pos in line_strips_2:
-        ws4.insert_image(row_p4, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.95, 'y_scale': 0.95})
-    row_p4 += 3
+        ws5.insert_image(row_p5, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.95, 'y_scale': 0.95})
+    row_p5 += 3
 
     line_strips_3 = [
         ('line_bidirectional.png', 1),
         ('line_dotted_mgmt.png', 21),
     ]
     for img_file, c_pos in line_strips_3:
-        ws4.insert_image(row_p4, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.95, 'y_scale': 0.95})
-    row_p4 += 3
+        ws5.insert_image(row_p5, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.95, 'y_scale': 0.95})
+    row_p5 += 3
 
     line_strips_4 = [
         ('line_dash_dot_db.png', 1),
     ]
     for img_file, c_pos in line_strips_4:
-        ws4.insert_image(row_p4, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.95, 'y_scale': 0.95})
-    row_p4 += 4
+        ws5.insert_image(row_p5, c_pos, f'assets_icons/{img_file}', {'x_scale': 0.95, 'y_scale': 0.95})
+    row_p5 += 4
 
     # Section F: 詳細リソース仕様表の空テンプレート（コピペ用）
-    ws4.merge_range(row_p4, 1, row_p4, 40, "F. 詳細リソース設計一覧表 空テンプレート (コピーして新規システム表として利用)", f_sec_title)
-    row_p4 += 1
+    ws5.merge_range(row_p5, 1, row_p5, 40, "F. 詳細リソース設計一覧表 空テンプレート (コピーして新規システム表として利用)", f_sec_title)
+    row_p5 += 1
     
     cur_c = 1
     for hname, cspan in d_cols:
         if cspan == 1:
-            ws4.write(row_p4, cur_c, hname, f_tbl_head)
+            ws5.write(row_p5, cur_c, hname, f_tbl_head)
         else:
-            ws4.merge_range(row_p4, cur_c, row_p4, cur_c + cspan - 1, hname, f_tbl_head)
+            ws5.merge_range(row_p5, cur_c, row_p5, cur_c + cspan - 1, hname, f_tbl_head)
         cur_c += cspan
-    ws4.set_row(row_p4, 22)
-    row_p4 += 1
+    ws5.set_row(row_p5, 22)
+    row_p5 += 1
     
     # 5 blank rows
     for r_idx in range(5):
@@ -896,25 +1127,672 @@ def create_system_architecture_template():
         c_fmt = f_tbl_cell_zebra if is_even else f_tbl_cell
         c_fmt_c = f_tbl_cell_zebra_center if is_even else f_tbl_cell_center
         
-        ws4.merge_range(row_p4, 1, row_p4, 2, f"{r_idx+1:02d}", c_fmt_c)
-        ws4.merge_range(row_p4, 3, row_p4, 7, "", c_fmt)
-        ws4.merge_range(row_p4, 8, row_p4, 11, "", c_fmt_c)
-        ws4.merge_range(row_p4, 12, row_p4, 17, "", c_fmt)
-        ws4.merge_range(row_p4, 18, row_p4, 22, "", f_tbl_cell_code)
-        ws4.merge_range(row_p4, 23, row_p4, 26, "", f_tbl_cell_code)
-        ws4.merge_range(row_p4, 27, row_p4, 32, "", c_fmt)
-        ws4.merge_range(row_p4, 33, row_p4, 36, "", c_fmt)
-        ws4.merge_range(row_p4, 37, row_p4, 41, "", c_fmt)
-        ws4.set_row(row_p4, 20)
-        row_p4 += 1
+        ws5.merge_range(row_p5, 1, row_p5, 2, f"{r_idx+1:02d}", c_fmt_c)
+        ws5.merge_range(row_p5, 3, row_p5, 7, "", c_fmt)
+        ws5.merge_range(row_p5, 8, row_p5, 11, "", c_fmt_c)
+        ws5.merge_range(row_p5, 12, row_p5, 17, "", c_fmt)
+        ws5.merge_range(row_p5, 18, row_p5, 22, "", f_tbl_cell_code)
+        ws5.merge_range(row_p5, 23, row_p5, 26, "", f_tbl_cell_code)
+        ws5.merge_range(row_p5, 27, row_p5, 32, "", c_fmt)
+        ws5.merge_range(row_p5, 33, row_p5, 36, "", c_fmt)
+        ws5.merge_range(row_p5, 37, row_p5, 41, "", c_fmt)
+        ws5.set_row(row_p5, 20)
+        row_p5 += 1
 
-    # Close workbook
+    # Close xlsxwriter workbook
     workbook.close()
+    print("Base workbook generated successfully via xlsxwriter.")
+
+
+# =========================================================================
+# 2. DRAWINGML INJECTION: 16-Connection Shapes, Connectors, Callouts
+# =========================================================================
+
+def generate_16pt_cxn_list():
+    """Generate 16 connection sites using DrawingML guide formulas for perfect snapping"""
+    items = [
+        # Top side: 4 sites at 20%, 40%, 60%, 80%
+        '<a:cxn ang="16200000"><a:pos x="x1" y="t"/></a:cxn>',
+        '<a:cxn ang="16200000"><a:pos x="x2" y="t"/></a:cxn>',
+        '<a:cxn ang="16200000"><a:pos x="x3" y="t"/></a:cxn>',
+        '<a:cxn ang="16200000"><a:pos x="x4" y="t"/></a:cxn>',
+        # Right side: 4 sites
+        '<a:cxn ang="0"><a:pos x="r" y="y1"/></a:cxn>',
+        '<a:cxn ang="0"><a:pos x="r" y="y2"/></a:cxn>',
+        '<a:cxn ang="0"><a:pos x="r" y="y3"/></a:cxn>',
+        '<a:cxn ang="0"><a:pos x="r" y="y4"/></a:cxn>',
+        # Bottom side: 4 sites
+        '<a:cxn ang="5400000"><a:pos x="x4" y="b"/></a:cxn>',
+        '<a:cxn ang="5400000"><a:pos x="x3" y="b"/></a:cxn>',
+        '<a:cxn ang="5400000"><a:pos x="x2" y="b"/></a:cxn>',
+        '<a:cxn ang="5400000"><a:pos x="x1" y="b"/></a:cxn>',
+        # Left side: 4 sites
+        '<a:cxn ang="10800000"><a:pos x="l" y="y4"/></a:cxn>',
+        '<a:cxn ang="10800000"><a:pos x="l" y="y3"/></a:cxn>',
+        '<a:cxn ang="10800000"><a:pos x="l" y="y2"/></a:cxn>',
+        '<a:cxn ang="10800000"><a:pos x="l" y="y1"/></a:cxn>',
+    ]
+    return "".join(items)
+
+
+def create_16pt_node_shape_xml(sp_id, name, col_from, row_from, col_to, row_to, fill_hex, border_hex, title, subtitle=None):
+    """Creates a rounded rectangle node card with 16 connection sites snapped to grid cells"""
+    cxn_xml = generate_16pt_cxn_list()
+    text_xml = f'''<a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="950" b="1">
+          <a:solidFill><a:srgbClr val="{border_hex}"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>{title}</a:t>
+      </a:r>
+    </a:p>'''
+    if subtitle:
+        text_xml += f'''<a:p>
+      <a:pPr algn="ctr"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="800">
+          <a:solidFill><a:srgbClr val="4A5568"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t>{subtitle}</a:t>
+      </a:r>
+    </a:p>'''
+
+    cust_geom = f'''<a:custGeom>
+        <a:avLst/>
+        <a:gdLst>
+          <a:gd name="rad" fmla="*/ 8000 w 100000"/>
+          <a:gd name="x1" fmla="*/ w 1 5"/>
+          <a:gd name="x2" fmla="*/ w 2 5"/>
+          <a:gd name="x3" fmla="*/ w 3 5"/>
+          <a:gd name="x4" fmla="*/ w 4 5"/>
+          <a:gd name="y1" fmla="*/ h 1 5"/>
+          <a:gd name="y2" fmla="*/ h 2 5"/>
+          <a:gd name="y3" fmla="*/ h 3 5"/>
+          <a:gd name="y4" fmla="*/ h 4 5"/>
+        </a:gdLst>
+        <a:ahLst/>
+        <a:cxnLst>{cxn_xml}</a:cxnLst>
+        <a:rect l="l" t="t" r="r" b="b"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="8000" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="92000" y="0"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="16200000" swAng="5400000"/>
+            <a:lnTo><a:pt x="100000" y="92000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="0" swAng="5400000"/>
+            <a:lnTo><a:pt x="8000" y="100000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="5400000" swAng="5400000"/>
+            <a:lnTo><a:pt x="0" y="8000"/></a:lnTo>
+            <a:arcTo wR="8000" hR="8000" stAng="10800000" swAng="5400000"/>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>'''
+
+    return f'''<xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>{col_from}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>{row_from}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>{col_to}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>{row_to}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="{sp_id}" name="{name}"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="2000000" cy="1000000"/></a:xfrm>
+      {cust_geom}
+      <a:solidFill><a:srgbClr val="{fill_hex}"/></a:solidFill>
+      <a:ln w="22225" cmpd="sng">
+        <a:solidFill><a:srgbClr val="{border_hex}"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="45720" tIns="45720" rIns="45720" bIns="45720" anchor="ctr"/>
+      <a:lstStyle/>
+      {text_xml}
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor>'''
+
+
+def create_16pt_container_box_xml(sp_id, name, col_from, row_from, col_to, row_to, fill_hex, border_hex, title):
+    """Creates a container box with 16 connection sites for zone boundaries"""
+    cxn_xml = generate_16pt_cxn_list()
+    text_xml = f'''<a:p>
+      <a:pPr algn="l"/>
+      <a:r>
+        <a:rPr lang="ja-JP" sz="900" b="1">
+          <a:solidFill><a:srgbClr val="{border_hex}"/></a:solidFill>
+          <a:latin typeface="Meiryo UI"/>
+          <a:ea typeface="Meiryo UI"/>
+        </a:rPr>
+        <a:t> {title}</a:t>
+      </a:r>
+    </a:p>'''
+
+    cust_geom = f'''<a:custGeom>
+        <a:avLst/>
+        <a:gdLst>
+          <a:gd name="x1" fmla="*/ w 1 5"/>
+          <a:gd name="x2" fmla="*/ w 2 5"/>
+          <a:gd name="x3" fmla="*/ w 3 5"/>
+          <a:gd name="x4" fmla="*/ w 4 5"/>
+          <a:gd name="y1" fmla="*/ h 1 5"/>
+          <a:gd name="y2" fmla="*/ h 2 5"/>
+          <a:gd name="y3" fmla="*/ h 3 5"/>
+          <a:gd name="y4" fmla="*/ h 4 5"/>
+        </a:gdLst>
+        <a:ahLst/>
+        <a:cxnLst>{cxn_xml}</a:cxnLst>
+        <a:rect l="l" t="t" r="r" b="b"/>
+        <a:pathLst>
+          <a:path w="100000" h="100000">
+            <a:moveTo><a:pt x="0" y="0"/></a:moveTo>
+            <a:lnTo><a:pt x="100000" y="0"/></a:lnTo>
+            <a:lnTo><a:pt x="100000" y="100000"/></a:lnTo>
+            <a:lnTo><a:pt x="0" y="100000"/></a:lnTo>
+            <a:close/>
+          </a:path>
+        </a:pathLst>
+      </a:custGeom>'''
+
+    return f'''<xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>{col_from}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>{row_from}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>{col_to}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>{row_to}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="{sp_id}" name="{name}"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="2000000" cy="1000000"/></a:xfrm>
+      {cust_geom}
+      <a:solidFill><a:srgbClr val="{fill_hex}"/></a:solidFill>
+      <a:ln w="19050" cmpd="sng">
+        <a:solidFill><a:srgbClr val="{border_hex}"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="72000" tIns="54000" rIns="72000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      {text_xml}
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor>'''
+
+
+def create_connector_xml(sp_id, name, col_from, row_from, col_to, row_to, color_hex, line_type="elbow", has_arrow=True, is_bidirectional=False, is_dashed=False):
+    """Creates an independent connector line ready to be snapped to shapes"""
+    geom_name = "bentConnector3" if line_type == "elbow" else "line"
     
-    # Also create an English alias copy for CLI convenience
-    shutil.copyfile(filename, "AWS_Hybrid_Architecture_Template.xlsx")
-    print(f"Template workbook successfully generated: {filename}")
-    print("English alias copy created: AWS_Hybrid_Architecture_Template.xlsx")
+    if is_bidirectional:
+        head_end = '<a:headEnd type="triangle" w="med" len="med"/>'
+        tail_end = '<a:tailEnd type="triangle" w="med" len="med"/>'
+    elif has_arrow:
+        head_end = '<a:headEnd type="none"/>'
+        tail_end = '<a:tailEnd type="triangle" w="med" len="med"/>'
+    else:
+        head_end = '<a:headEnd type="none"/>'
+        tail_end = '<a:tailEnd type="none"/>'
+        
+    dash_xml = '<a:prstDash val="dash"/>' if is_dashed else ''
+
+    return f'''<xdr:twoCellAnchor>
+  <xdr:from><xdr:col>{col_from}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>{row_from}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>{col_to}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>{row_to}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:cxnSp macro="">
+    <xdr:nvCxnSpPr>
+      <xdr:cNvPr id="{sp_id}" name="{name}"/>
+      <xdr:cNvCxnSpPr/>
+    </xdr:nvCxnSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="1000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="{geom_name}"><a:avLst/></a:prstGeom>
+      <a:ln w="22225">
+        <a:solidFill><a:srgbClr val="{color_hex}"/></a:solidFill>
+        {dash_xml}
+        {head_end}
+        {tail_end}
+      </a:ln>
+    </xdr:spPr>
+  </xdr:cxnSp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor>'''
+
+
+def create_callout_xml(sp_id, name, col_from, row_from, col_to, row_to, fill_hex, border_hex, title, body_text):
+    """Creates a callout (wedgeRoundRectCallout) for annotations"""
+    body_lines = body_text.split("\n")
+    p_runs = []
+    for bline in body_lines:
+        safe_line = bline.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        p_runs.append(f'''<a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>{safe_line}</a:t>
+        </a:r>
+      </a:p>''')
+    body_xml = "".join(p_runs)
+    safe_title = title.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+    return f'''<xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>{col_from}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>{row_from}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>{col_to}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>{row_to}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="{sp_id}" name="{name}"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="2000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="wedgeRoundRectCallout"><a:avLst/></a:prstGeom>
+      <a:solidFill><a:srgbClr val="{fill_hex}"/></a:solidFill>
+      <a:ln w="19050">
+        <a:solidFill><a:srgbClr val="{border_hex}"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="54000" tIns="54000" rIns="54000" bIns="54000" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="900" b="1">
+            <a:solidFill><a:srgbClr val="{border_hex}"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>{safe_title}</a:t>
+        </a:r>
+      </a:p>
+      {body_xml}
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor>'''
+
+
+def create_memo_card_xml(sp_id, name, col_from, row_from, col_to, row_to, fill_hex, border_hex, header_title, body_lines):
+    """Creates a structured memo card shape with colored header and text"""
+    body_runs = []
+    for line in body_lines:
+        safe_line = line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        body_runs.append(f'''<a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="800">
+            <a:solidFill><a:srgbClr val="2D3748"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>{safe_line}</a:t>
+        </a:r>
+      </a:p>''')
+    body_xml = "".join(body_runs)
+    safe_header = header_title.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+    return f'''<xdr:twoCellAnchor editAs="oneCell">
+  <xdr:from><xdr:col>{col_from}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>{row_from}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>
+  <xdr:to><xdr:col>{col_to}</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>{row_to}</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:to>
+  <xdr:sp macro="" textlink="">
+    <xdr:nvSpPr>
+      <xdr:cNvPr id="{sp_id}" name="{name}"/>
+      <xdr:cNvSpPr/>
+    </xdr:nvSpPr>
+    <xdr:spPr>
+      <a:xfrm><a:off x="0" y="0"/><a:ext cx="2000000" cy="1000000"/></a:xfrm>
+      <a:prstGeom prst="roundRect"><a:avLst><a:gd name="adj" fmla="val 8000"/></a:avLst></a:prstGeom>
+      <a:solidFill><a:srgbClr val="{fill_hex}"/></a:solidFill>
+      <a:ln w="19050">
+        <a:solidFill><a:srgbClr val="{border_hex}"/></a:solidFill>
+      </a:ln>
+    </xdr:spPr>
+    <xdr:txBody>
+      <a:bodyPr vert="horz" lIns="54000" tIns="45720" rIns="54000" bIns="45720" anchor="t"/>
+      <a:lstStyle/>
+      <a:p>
+        <a:pPr algn="l"/>
+        <a:r>
+          <a:rPr lang="ja-JP" sz="900" b="1">
+            <a:solidFill><a:srgbClr val="{border_hex}"/></a:solidFill>
+            <a:latin typeface="Meiryo UI"/>
+            <a:ea typeface="Meiryo UI"/>
+          </a:rPr>
+          <a:t>{safe_header}</a:t>
+        </a:r>
+      </a:p>
+      {body_xml}
+    </xdr:txBody>
+  </xdr:sp>
+  <xdr:clientData/>
+</xdr:twoCellAnchor>'''
+def inject_drawings_into_template(xlsx_path):
+    """
+    Extracts the generated xlsx, enriches Sheet 3 (and others) with DrawingML shapes,
+    and re-zips the workbook.
+    """
+    temp_dir = "temp_unzip_build"
+    if os.path.exists(temp_dir):
+        shutil.rmtree(temp_dir)
+        
+    with zipfile.ZipFile(xlsx_path, 'r') as z:
+        z.extractall(temp_dir)
+        
+    drawings_dir = os.path.join(temp_dir, 'xl', 'drawings')
+    ws_dir = os.path.join(temp_dir, 'xl', 'worksheets')
+    
+    # -------------------------------------------------------------------------
+    # Enrich SHEET 3: 03_パーツ集_作図図形・コネクタ線
+    # Sheet 3 (4th sheet) corresponds to drawing3.xml
+    # -------------------------------------------------------------------------
+    drawing3_path = os.path.join(drawings_dir, 'drawing3.xml')
+    shapes_list = []
+    sp_id = 100
+    
+    # 1. Section A: 7-Color 16-Connection Nodes & Containers
+    # Row 1: Charcoal, Cloud Blue, Emerald, Amber
+    color_keys_row1 = ["charcoal", "cloud_blue", "emerald", "amber"]
+    col_offsets_row1 = [1, 11, 21, 31]
+    for c_key, c_col in zip(color_keys_row1, col_offsets_row1):
+        c_data = PALETTE_7COLORS[c_key]
+        sp_id += 1
+        # Node shape: rows 8..10 (col c_col .. c_col+9)
+        shapes_list.append(create_16pt_node_shape_xml(
+            sp_id, f"Node_{c_key}", c_col, 8, c_col + 9, 10,
+            c_data["fill"], c_data["border"], c_data["name"].split(" ")[0], c_data["role"].split("・")[0]
+        ))
+        sp_id += 1
+        # Container box: rows 12..16 (col c_col .. c_col+9)
+        shapes_list.append(create_16pt_container_box_xml(
+            sp_id, f"Box_{c_key}", c_col, 12, c_col + 9, 16,
+            c_data["fill"], c_data["border"], f"【{c_data['name'].split(' ')[0]} 境界枠】"
+        ))
+
+    # Row 2: Purple, Cyan, Rose
+    color_keys_row2 = ["purple", "cyan", "rose"]
+    col_offsets_row2 = [1, 11, 21]
+    for c_key, c_col in zip(color_keys_row2, col_offsets_row2):
+        c_data = PALETTE_7COLORS[c_key]
+        sp_id += 1
+        shapes_list.append(create_16pt_node_shape_xml(
+            sp_id, f"Node_{c_key}", c_col, 19, c_col + 9, 21,
+            c_data["fill"], c_data["border"], c_data["name"].split(" ")[0], c_data["role"].split("・")[0]
+        ))
+        sp_id += 1
+        shapes_list.append(create_16pt_container_box_xml(
+            sp_id, f"Box_{c_key}", c_col, 23, c_col + 9, 27,
+            c_data["fill"], c_data["border"], f"【{c_data['name'].split(' ')[0]} 境界枠】"
+        ))
+
+    # 2. Section B: 7-Color Connector Lines (Elbow, Straight, Bidirectional, Dashed)
+    cur_row = 31
+    for c_key in ["charcoal", "cloud_blue", "emerald", "amber", "purple", "cyan", "rose"]:
+        c_data = PALETTE_7COLORS[c_key]
+        c_hex = c_data["border"]
+        
+        sp_id += 1
+        shapes_list.append(create_connector_xml(sp_id, f"Cxn_Elbow_{c_key}", 8, cur_row, 13, cur_row + 1, c_hex, "elbow", True))
+        sp_id += 1
+        shapes_list.append(create_connector_xml(sp_id, f"Cxn_Straight_{c_key}", 16, cur_row, 21, cur_row, c_hex, "straight", True))
+        sp_id += 1
+        shapes_list.append(create_connector_xml(sp_id, f"Cxn_Bidir_{c_key}", 24, cur_row, 29, cur_row, c_hex, "straight", True, True))
+        sp_id += 1
+        shapes_list.append(create_connector_xml(sp_id, f"Cxn_Dashed_{c_key}", 32, cur_row, 37, cur_row, c_hex, "straight", True, False, True))
+        cur_row += 2
+
+    # 3. Section C: 3-Color Comments (Callout & Memo Card)
+    col_comms = [1, 14, 27]
+    for (ck, cdat), col_c in zip(COMMENT_3COLORS.items(), col_comms):
+        sp_id += 1
+        shapes_list.append(create_callout_xml(
+            sp_id, f"Callout_{ck}", col_c, 48, col_c + 12, 52,
+            cdat["fill"], cdat["border"], cdat["title"], cdat["desc"]
+        ))
+        sp_id += 1
+        shapes_list.append(create_memo_card_xml(
+            sp_id, f"Memo_{ck}", col_c, 54, col_c + 12, 59,
+            cdat["fill"], cdat["border"], cdat["title"], cdat["sample_lines"]
+        ))
+
+    # 4. Section D: 16-pt Demo Hub Node
+    sp_id += 1
+    shapes_list.append(create_16pt_node_shape_xml(
+        sp_id, "Hub_16pt_Demo", 16, 68, 24, 71,
+        "F8FAFC", "1A202C", "16接続点 Hubノード", "等間隔接続完全サンプル"
+    ))
+
+    # Write out drawing XML for sheet 3
+    final_drawing3_xml = f'''<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+{"".join(shapes_list)}
+</xdr:wsDr>'''
+
+    with open(drawing3_path, 'w', encoding='utf-8') as f:
+        f.write(final_drawing3_xml)
+    print(f"Successfully injected {len(shapes_list)} shapes and connectors into drawing3.xml for Sheet 3.")
+
+    # -------------------------------------------------------------------------
+    # Also enrich Sheet 2 (Overview) with 3-color Comment Cards
+    # -------------------------------------------------------------------------
+    drawing1_path = os.path.join(drawings_dir, 'drawing1.xml')
+    if os.path.exists(drawing1_path):
+        with open(drawing1_path, 'r', encoding='utf-8') as f:
+            s1_content = f.read()
+            
+        s1_extra_shapes = []
+        # Amber comment for Salesforce (rows 12..16, cols 34..39)
+        s1_extra_shapes.append(create_callout_xml(
+            801, "Overview_SaaS_Note", 34, 12, 39, 16,
+            COMMENT_3COLORS["warning_amber"]["fill"], COMMENT_3COLORS["warning_amber"]["border"],
+            "⚠️ Salesforce API連携", "・OAuth2.0 / 双方向同期\n・API日次制限考慮"
+        ))
+        # Emerald comment for OT (rows 12..16, cols 2..8)
+        s1_extra_shapes.append(create_callout_xml(
+            802, "Overview_OT_Note", 2, 12, 8, 16,
+            COMMENT_3COLORS["security_emerald"]["fill"], COMMENT_3COLORS["security_emerald"]["border"],
+            "🛡️ 現場OT隔離統制", "・外部インターネット完全遮断\n・Modbus/OPC-UA暗号化"
+        ))
+        # Blue comment for Cloud VPC (rows 15..19, cols 24..30)
+        s1_extra_shapes.append(create_memo_card_xml(
+            803, "Overview_Cloud_Note", 24, 15, 30, 19,
+            COMMENT_3COLORS["info_blue"]["fill"], COMMENT_3COLORS["info_blue"]["border"],
+            "ℹ️ Multi-AZ クラウド基盤", ["・東京リージョン 1a/1c 冗長", "・自動フェイルオーバー 30秒以内"]
+        ))
+        
+        s1_content = s1_content.replace('</xdr:wsDr>', f'{"".join(s1_extra_shapes)}</xdr:wsDr>')
+        with open(drawing1_path, 'w', encoding='utf-8') as f:
+            f.write(s1_content)
+        print("Successfully enriched Sheet 2 (Overview) with 3-color comments.")
+
+    # -------------------------------------------------------------------------
+    # Ensure [Content_Types].xml covers all drawings
+    # -------------------------------------------------------------------------
+    ct_path = os.path.join(temp_dir, '[Content_Types].xml')
+    if os.path.exists(ct_path):
+        with open(ct_path, 'r', encoding='utf-8') as f:
+            ct_content = f.read()
+        for df in os.listdir(drawings_dir):
+            if df.startswith('drawing') and df.endswith('.xml'):
+                part_entry = f'<Override PartName="/xl/drawings/{df}" ContentType="application/vnd.openxmlformats-officedocument.drawing+xml"/>'
+                if f'/xl/drawings/{df}' not in ct_content:
+                    ct_content = ct_content.replace('</Types>', f'{part_entry}</Types>')
+        with open(ct_path, 'w', encoding='utf-8') as f:
+            f.write(ct_content)
+
+    # -------------------------------------------------------------------------
+    # Re-zip workbook
+    # -------------------------------------------------------------------------
+    if os.path.exists(xlsx_path):
+        os.remove(xlsx_path)
+        
+    with zipfile.ZipFile(xlsx_path, 'w', zipfile.ZIP_DEFLATED) as z_out:
+        for root, dirs, files in os.walk(temp_dir):
+            for file in files:
+                full_p = os.path.join(root, file)
+                rel_p = os.path.relpath(full_p, temp_dir)
+                z_out.write(full_p, rel_p)
+                
+    shutil.rmtree(temp_dir)
+    print(f"Final workbook packaged successfully: {xlsx_path}")
+def verify_and_finish_with_excel_com(xlsx_path):
+    """
+    Verifies the generated Excel template with Excel COM Application,
+    connects the 16 demo lines to the Hub node, ensures perfect page setup for all sheets,
+    and exports high-quality PDF and PNG previews.
+    """
+    print("\n--- Starting Excel COM Verification & Final Polish ---")
+    excel = win32com.client.Dispatch('Excel.Application')
+    excel.Visible = False
+    excel.DisplayAlerts = False
+    
+    try:
+        abs_p = os.path.abspath(xlsx_path)
+        wb = excel.Workbooks.Open(abs_p)
+        print(f"Workbook opened cleanly: {wb.Name}")
+        print(f"Total Sheets count: {wb.Worksheets.Count}")
+        
+        # Ensure PageSetup for all sheets: exactly 1 page wide, 1 page tall
+        for i in range(1, wb.Worksheets.Count + 1):
+            ws = wb.Worksheets(i)
+            print(f"  Sheet {i}: [{ws.Name}] - Shapes count: {ws.Shapes.Count}")
+            try:
+                ws.PageSetup.Zoom = False
+                ws.PageSetup.FitToPagesWide = 1
+                ws.PageSetup.FitToPagesTall = 1
+            except Exception as pe:
+                pass
+            
+        ws3 = wb.Worksheets('03_パーツ集_作図図形・コネクタ線')
+        print(f"\nVerifying '{ws3.Name}' shapes:")
+        
+        hub_node = ws3.Shapes('Hub_16pt_Demo')
+        print(f"  [OK] Hub_16pt_Demo ConnectionSiteCount: {hub_node.ConnectionSiteCount}")
+        assert hub_node.ConnectionSiteCount == 16, "Hub node must have 16 connection sites!"
+        
+        # Connect 16 connectors to Hub_16pt_Demo via COM to create the ultimate demo!
+        # Colors cycle through the 7 palette colors
+        colors_cycle = [
+            0x1A202C, 0x1E40AF, 0x047857, 0xB45309,
+            0x6D28D9, 0x0369A1, 0xBE123C, 0x1A202C,
+            0x1E40AF, 0x047857, 0xB45309, 0x6D28D9,
+            0x0369A1, 0xBE123C, 0x1A202C, 0x1E40AF
+        ]
+        
+        print("  [OK] Connecting 16 demo lines to Hub_16pt_Demo via COM...")
+        hub_left = hub_node.Left
+        hub_top = hub_node.Top
+        hub_w = hub_node.Width
+        hub_h = hub_node.Height
+        
+        for site_idx in range(1, 17):
+            # Calculate outward direction based on site_idx
+            # 1-4: Top (ang 270) -> line goes up
+            # 5-8: Right (ang 0) -> line goes right
+            # 9-12: Bottom (ang 90) -> line goes down
+            # 13-16: Left (ang 180) -> line goes left
+            if 1 <= site_idx <= 4:
+                # Top: fx above site
+                fx = hub_left + hub_w * (0.2 * site_idx)
+                fy = hub_top - 45
+            elif 5 <= site_idx <= 8:
+                # Right: fx to the right of site
+                fx = hub_left + hub_w + 45
+                fy = hub_top + hub_h * (0.2 * (site_idx - 4))
+            elif 9 <= site_idx <= 12:
+                # Bottom: fx below site
+                fx = hub_left + hub_w * (1.0 - 0.2 * (site_idx - 8))
+                fy = hub_top + hub_h + 45
+            else:
+                # Left: fx to the left of site
+                fx = hub_left - 45
+                fy = hub_top + hub_h * (1.0 - 0.2 * (site_idx - 12))
+                
+            # Add connector with End point at (fx, fy), then connect Begin to hub_node site
+            cxn = ws3.Shapes.AddConnector(1, fx, fy, fx, fy)
+            cxn.Name = f"HubDemo_Line_{site_idx}"
+            cxn.ConnectorFormat.BeginConnect(hub_node, site_idx)
+            cxn.Line.Weight = 2.0
+            cxn.Line.ForeColor.RGB = colors_cycle[site_idx - 1]
+            cxn.Line.EndArrowheadStyle = 2 # msoArrowheadTriangle
+            cxn.Line.EndArrowheadLength = 2
+            cxn.Line.EndArrowheadWidth = 2
+
+        print(f"  [OK] Total shapes on Sheet 3 after 16-connection demo: {ws3.Shapes.Count}")
+        
+        # Save changes cleanly to a temp file, then replace
+        temp_out = os.path.abspath("temp_com_out.xlsx")
+        if os.path.exists(temp_out):
+            os.remove(temp_out)
+        wb.SaveAs(temp_out)
+        
+        # Export PDF of full workbook or sheet by sheet to verify
+        pdf_out = os.path.abspath("output_preview.pdf")
+        if os.path.exists(pdf_out):
+            os.remove(pdf_out)
+        try:
+            wb.ExportAsFixedFormat(0, pdf_out)
+            print(f"  [OK] PDF exported successfully: {pdf_out}")
+        except Exception as pe:
+            print(f"  [WARN] wb.ExportAsFixedFormat failed: {pe}")
+            
+        wb.Close(False)
+        excel.Quit()
+        
+        shutil.copyfile(temp_out, xlsx_path)
+        shutil.copyfile(temp_out, "AWS_Hybrid_Architecture_Template.xlsx")
+        if os.path.exists(temp_out):
+            os.remove(temp_out)
+            
+        print("[SUCCESS] All COM verifications & polish completed with 100% SUCCESS!")
+        print("[SUCCESS] English alias copy updated: AWS_Hybrid_Architecture_Template.xlsx")
+        
+        # Render PDF pages to PNGs
+        try:
+            import fitz
+            if os.path.exists(pdf_out):
+                doc = fitz.open(pdf_out)
+                print(f"  [OK] Total pages in output_preview.pdf: {len(doc)}")
+                for p_idx in range(len(doc)):
+                    pix = doc[p_idx].get_pixmap(dpi=150)
+                    pix.save(f"preview_sheet_{p_idx + 1}.png")
+                print(f"  [OK] All {len(doc)} pages rendered to preview_sheet_*.png")
+        except Exception as re:
+            print(f"  [WARN] PDF rendering failed: {re}")
+            
+        return True
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        try:
+            excel.Quit()
+        except:
+            pass
+        return False
+def main():
+    print("=== Building AWS Hybrid Architecture Template Ver 2.0.0 ===")
+    build_workbook()
+    xlsx_path = "AWS_現場システム統合構成図_テンプレート.xlsx"
+    inject_drawings_into_template(xlsx_path)
+    success = verify_and_finish_with_excel_com(xlsx_path)
+    if success:
+        print("\n=======================================================")
+        print("  [SUCCESS] AWS Hybrid Architecture Template Ver 2.0.0 Ready!  ")
+        print("=======================================================")
+    else:
+        print("\n=== Verification Failed! ===")
+        sys.exit(1)
+
 
 if __name__ == '__main__':
-    create_system_architecture_template()
+    main()

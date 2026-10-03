@@ -1,0 +1,11 @@
+USER_INPUT:
+<USER_REQUEST>
+システム構成図で、図形を配置して、その図形どおしをきれいに線でつなげることができるような構成図テンプレートに書き直してください。図形の配置は、きれいに配置できるようにして方眼紙上の升目に吸着するようにしてください、線も同じようにきれいに吸着できるようにして、ただし線の接続箇所は四角形の場合は4箇所ではなく、等間隔に16箇所程度の接続が可能なように図形部品を準備してください。モノトーンであることは前提として、ただし接続経路ごと（例えばSalesforceから、イントラから、外部から）などのデータの流れがわかりやすいように、図形を美しい7色（黒＋6色（うちの3色はすでに実装されているものでよいので追加3色）で切り分けられるように図形を準備して、線も同じように準備してください。またポイントや付記事項を書き込めるように美しいコメント入力用の図形も同じように３色の美しい配色で配置できるようにしてください。
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-10-04T04:19:52+09:00.
+</ADDITIONAL_METADATA>
+<USER_SETTINGS_CHANGE>
+The user changed setting `Model Selection` from None to Gemini 3.8 Flash (High). No need to comment on this change if the user doesn't ask about it. If reporting what model you are, please use a human readable name instead of the exact string.
+</USER_SETTINGS_CHANGE>
+
